@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Routier 87 Music Hub — V80</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #050609;
+            --panel: rgba(15, 17, 25, 0.82);
+            --panel-light: rgba(255,255,255,0.055);
+            --border: rgba(255,255,255,0.09);
+            --text: #ffffff;
+            --muted: #9ba1b0;
+            --purple: #7857ff;
+            --blue: #3fa9ff;
+            --green: #36e09b;
+            --red: #ff5577;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                linear-gradient(rgba(3,5,10,.72), rgba(3,5,10,.92)),
+                url("https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=2400&q=90")
+                center/cover fixed;
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 15% 20%, rgba(120,87,255,.18), transparent 30%),
+                radial-gradient(circle at 85% 15%, rgba(63,169,255,.14), transparent 28%),
+                radial-gradient(circle at 50% 90%, rgba(120,87,255,.10), transparent 35%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* =========================
+           LOGIN
+        ========================= */
+
+        #loginPage {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+        }
+
+        .login-box {
+            width: 430px;
+            max-width: 100%;
+            padding: 42px;
+            border: 1px solid var(--border);
+            background: rgba(8,10,16,.78);
+            backdrop-filter: blur(25px);
+            border-radius: 28px;
+            box-shadow:
+                0 30px 100px rgba(0,0,0,.7),
+                0 0 80px rgba(120,87,255,.10);
+        }
+
+        .logo {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 21px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--purple), var(--blue));
+            box-shadow: 0 15px 40px rgba(120,87,255,.35);
+            margin-bottom: 25px;
+        }
+
+        .login-box .small-title {
+            color: #8e98ff;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            margin-bottom: 12px;
+        }
+
+        .login-box h1 {
+            font-size: 40px;
+            line-height: 1;
+            margin-bottom: 15px;
+            letter-spacing: -2px;
+        }
+
+        .login-box p {
+            color: var(--muted);
+            line-height: 1.6;
+            margin-bottom: 28px;
+        }
+
+        .input-group {
+            margin-bottom: 16px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: bold;
+            color: #cfd3dd;
+            margin-bottom: 7px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px;
+            border-radius: 13px;
+            border: 1px solid var(--border);
+            outline: none;
+            background: rgba(255,255,255,.04);
+            color: white;
+            font-size: 14px;
+        }
+
+        .input-group input:focus {
+            border-color: var(--purple);
+            box-shadow: 0 0 20px rgba(120,87,255,.15);
+        }
+
+        .main-button {
+            width: 100%;
+            border: 0;
+            padding: 15px;
+            border-radius: 13px;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            background: linear-gradient(135deg, var(--purple), var(--blue));
+            box-shadow: 0 12px 30px rgba(120,87,255,.25);
+            transition: .25s;
+        }
+
+        .main-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 40px rgba(120,87,255,.35);
+        }
+
+        #loginError {
+            color: var(--red);
+            font-size: 12px;
+            margin-top: 12px;
+        }
+
+        /* =========================
+           APPLICATION
+        ========================= */
+
+        #app {
+            display: none;
+        }
+
+        .topbar {
+            height: 80px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            background: rgba(5,6,9,.72);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand .logo {
+            width: 43px;
+            height: 43px;
+            border-radius: 13px;
+            margin: 0;
+            font-size: 13px;
+        }
+
+        .brand-title {
+            font-weight: bold;
+        }
+
+        .brand-subtitle {
+            display: block;
+            font-size: 9px;
+            letter-spacing: 2px;
+            color: var(--muted);
+            margin-top: 3px;
+        }
+
+        .top-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-name {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .logout {
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,.04);
+            color: white;
+            padding: 10px 14px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        main {
+            width: 90%;
+            max-width: 1400px;
+            margin: auto;
+            padding: 45px 0 140px;
+        }
+
+        .hero {
+            min-height: 300px;
+            border-radius: 30px;
+            border: 1px solid var(--border);
+            background:
+                linear-gradient(110deg, rgba(13,16,27,.94), rgba(18,15,35,.65)),
+                url("https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=2000&q=90")
+                center/cover;
+            padding: 50px;
+            display: flex;
+            align-items: flex-end;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0,0,0,.35);
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            right: -150px;
+            top: -150px;
+            border-radius: 50%;
+            background: rgba(120,87,255,.2);
+            filter: blur(70px);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-tag {
+            color: #9d91ff;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            margin-bottom: 12px;
+        }
+
+        .hero h2 {
+            font-size: clamp(40px, 6vw, 70px);
+            letter-spacing: -4px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            color: #b3b8c4;
+            max-width: 650px;
+            line-height: 1.7;
+        }
+
+        /* =========================
+           LIBRARY
+        ========================= */
+
+        .library-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            margin: 45px 0 22px;
+        }
+
+        .library-header h3 {
+            font-size: 27px;
+        }
+
+        .library-header p {
+            color: var(--muted);
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        .search {
+            width: 280px;
+            padding: 12px 15px;
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            background: rgba(10,12,18,.7);
+            color: white;
+            outline: none;
+        }
+
+        .music-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 17px;
+        }
+
+        .music-card {
+            background: rgba(13,16,23,.83);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 12px;
+            backdrop-filter: blur(15px);
+            transition: .25s;
+        }
+
+        .music-card:hover {
+            transform: translateY(-7px);
+            border-color: rgba(120,87,255,.45);
+            box-shadow: 0 25px 50px rgba(0,0,0,.35);
+        }
+
+        .album {
+            position: relative;
+            aspect-ratio: 1;
+            overflow: hidden;
+            border-radius: 15px;
+            background:
+                linear-gradient(135deg, rgba(120,87,255,.8), rgba(63,169,255,.5)),
+                url("https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=800&q=80")
+                center/cover;
+        }
+
+        .play-button {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            border: 0;
+            border-radius: 50%;
+            background: white;
+            color: #111;
+            font-size: 22px;
+            cursor: pointer;
+            box-shadow: 0 12px 35px rgba(0,0,0,.45);
+            transition: .2s;
+        }
+
+        .play-button:hover {
+            transform: translate(-50%, -50%) scale(1.08);
+        }
+
+        .music-title {
+            margin: 13px 4px 3px;
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .music-artist {
+            margin: 0 4px 13px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .actions {
+            display: grid;
+            grid-template-columns: 1fr 40px 40px 40px;
+            gap: 6px;
+        }
+
+        .action {
+            min-height: 38px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,.035);
+            color: white;
+            cursor: pointer;
+        }
+
+        .action.play-small {
+            background: linear-gradient(135deg,var(--purple),var(--blue));
+            border: 0;
+        }
+
+        .action:hover {
+            border-color: var(--purple);
+        }
+
+        /* =========================
+           CREATOR
+        ========================= */
+
+        #creator {
+            display: none;
+        }
+
+        .creator-title {
+            margin: 45px 0 20px;
+        }
+
+        .creator-title h3 {
+            font-size: 28px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 12px;
+        }
+
+        .stat {
+            padding: 20px;
+            border-radius: 17px;
+            border: 1px solid var(--border);
+            background: rgba(13,16,23,.85);
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 28px;
+            margin-bottom: 6px;
+        }
+
+        .stat span {
+            color: var(--muted);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .messages {
+            margin-top: 25px;
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            background: rgba(13,16,23,.85);
+        }
+
+        .message {
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .message:last-child {
+            border-bottom: 0;
+        }
+
+        .message strong {
+            color: white;
+        }
+
+        .message p {
+            color: #d3d7df;
+            margin-top: 6px;
+        }
+
+        .message small {
+            color: var(--muted);
+        }
+
+        /* =========================
+           PLAYER
+        ========================= */
+
+        .player {
+            position: fixed;
+            left: 50%;
+            bottom: 20px;
+            transform: translateX(-50%);
+            width: min(1000px, calc(100% - 30px));
+            padding: 13px 17px;
+            border-radius: 18px;
+            border: 1px solid rgba(255,255,255,.12);
+            background: rgba(10,12,18,.91);
+            backdrop-filter: blur(25px);
+            box-shadow: 0 20px 70px rgba(0,0,0,.7);
+            z-index: 200;
+            display: none;
+        }
+
+        .player-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .player-title {
+            font-weight: bold;
+        }
+
+        .player-user {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        audio {
+            width: 100%;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media(max-width:1100px) {
+            .music-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media(max-width:700px) {
+            .topbar {
+                padding: 0 18px;
+            }
+
+            .user-name {
+                display: none;
+            }
+
+            main {
+                width: calc(100% - 30px);
+                padding-top: 20px;
+            }
+
+            .hero {
+                padding: 30px;
+                min-height: 270px;
+            }
+
+            .hero h2 {
+                letter-spacing: -2px;
+            }
+
+            .library-header {
+                display: block;
+            }
+
+            .search {
+                width: 100%;
+                margin-top: 15px;
+            }
+
+            .music-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media(max-width:450px) {
+            .music-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .login-box {
+                padding: 28px;
+            }
+
+            .login-box h1 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- =========================
+     LOGIN
+========================= -->
+
+<section id="loginPage">
+
+    <div class="login-box">
+
+        <div class="logo">
+            R87
+        </div>
+
+        <div class="small-title">
+            MUSIC HUB • V80
+        </div>
+
+        <h1>
+            Bienvenue.
+        </h1>
+
+        <p>
+            Connecte-toi à ton espace musical privé Routier 87.
+        </p>
+
+        <div class="input-group">
+            <label>IDENTIFIANT</label>
+            <input
+                type="text"
+                id="username"
+                placeholder="Ton identifiant"
+            >
+        </div>
+
+        <div class="input-group">
+            <label>MOT DE PASSE</label>
+            <input
+                type="password"
+                id="password"
+                placeholder="Ton mot de passe"
+            >
+        </div>
+
+        <button
+            class="main-button"
+            onclick="login()"
+        >
+            Se connecter →
+        </button>
+
+        <div id="loginError"></div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     APPLICATION
+========================= -->
+
+<div id="app">
+
+    <header class="topbar">
+
+        <div class="brand">
+
+            <div class="logo">
+                R87
+            </div>
+
+            <div>
+                <div class="brand-title">
+                    Routier 87 Music Hub
+                </div>
+
+                <span class="brand-subtitle">
+                    PRIVATE MUSIC PLATFORM • V80
+                </span>
+            </div>
+
+        </div>
+
+        <div class="top-user">
+
+            <span
+                class="user-name"
+                id="currentUser"
+            ></span>
+
+            <button
+                class="logout"
+                onclick="logout()"
+            >
+                Déconnexion
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <div class="hero-tag">
+                    ESPACE MUSICAL PRIVÉ
+                </div>
+
+                <h2 id="welcome">
+                    Bonjour.
+                </h2>
+
+                <p>
+                    Retrouve tes musiques, écoute-les,
+                    donne ton avis et partage tes impressions.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- BIBLIOTHÈQUE -->
+
+        <div class="library-header">
+
+            <div>
+
+                <h3>
+                    Ma bibliothèque
+                </h3>
+
+                <p>
+                    Toutes tes musiques
+                </p>
+
+            </div>
+
+            <input
+                class="search"
+                id="search"
+                placeholder="Rechercher une musique..."
+                oninput="searchMusic()"
+            >
+
+        </div>
+
+
+        <section
+            class="music-grid"
+            id="musicGrid"
+        >
+
+        </section>
+
+
+        <!-- CREATOR STUDIO -->
+
+        <section id="creator">
+
+            <div class="creator-title">
+
+                <h3>
+                    👑 Creator Studio
+                </h3>
+
+                <p style="color:#9ba1b0;margin-top:6px;">
+                    Centre de contrôle de Routier 87
+                </p>
+
+            </div>
+
+
+            <div class="stats">
+
+                <div class="stat">
+                    <strong id="statMusic">0</strong>
+                    <span>Musiques</span>
+                </div>
+
+                <div class="stat">
+                    <strong id="statUsers">9</strong>
+                    <span>Utilisateurs</span>
+                </div>
+
+                <div class="stat">
+                    <strong id="statLikes">0</strong>
+                    <span>Likes</span>
+                </div>
+
+                <div class="stat">
+                    <strong id="statDislikes">0</strong>
+                    <span>Dislikes</span>
+                </div>
+
+                <div class="stat">
+                    <strong id="statComments">0</strong>
+                    <span>Commentaires</span>
+                </div>
+
+                <div class="stat">
+                    <strong id="statDownloads">0</strong>
+                    <span>Téléchargements</span>
+                </div>
+
+            </div>
+
+
+            <div class="messages">
+
+                <h3 style="margin-bottom:15px;">
+                    💬 Activité récente
+                </h3>
+
+                <div id="messages">
+
+                    <div class="message">
+
+                        <strong>
+                            Système
+                        </strong>
+
+                        <p>
+                            Bienvenue dans ton Creator Studio.
+                        </p>
+
+                        <small>
+                            Maintenant
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- PLAYER -->
+
+    <div
+        class="player"
+        id="player"
+    >
+
+        <div class="player-info">
+
+            <div class="player-title">
+                <span id="playerTitle">
+                    Aucune musique
+                </span>
+            </div>
+
+            <div class="player-user">
+                Routier 87 Music Hub
+            </div>
+
+        </div>
+
+        <audio
+            id="audio"
+            controls
+        ></audio>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    /*
+    ==========================================
+        COMPTES DE DÉPART
+    ==========================================
+    */
+
+    const users = {
+
+        "Routier87": {
+            password: "2001",
+            name: "Routier 87",
+            creator: true
+        },
+
+        "Benjamin": {
+            password: "2026",
+            name: "Benjamin",
+            creator: false
+        },
+
+        "Samantha": {
+            password: "2026",
+            name: "Samantha",
+            creator: false
+        },
+
+        "Océane": {
+            password: "2026",
+            name: "Océane",
+            creator: false
+        },
+
+        "Chico": {
+            password: "2026",
+            name: "Chico",
+            creator: false
+        },
+
+        "Tristan": {
+            password: "2026",
+            name: "Tristan",
+            creator: false
+        },
+
+        "Manon": {
+            password: "2026",
+            name: "Manon",
+            creator: false
+        },
+
+        "Éric": {
+            password: "2026",
+            name: "Éric",
+            creator: false
+        },
+
+        "Mr_Wolf": {
+            password: "2026",
+            name: "Monsieur Olf",
+            creator: false
+        },
+
+        "F-O-T": {
+            password: "2025",
+            name: "Far Motors Transport",
+            creator: false
+        }
+
+    };
+
+
+    /*
+    ==========================================
+        MUSIQUES DE DÉMONSTRATION
+    ==========================================
+    */
+
+    const music = [
+
+        {
+            title: "Bienvenue sur Music Hub",
+            artist: "Routier 87",
+            audio: ""
+        },
+
+        {
+            title: "Night Drive",
+            artist: "Routier 87",
+            audio: ""
+        },
+
+        {
+            title: "Road Dreams",
+            artist: "Routier 87",
+            audio: ""
+        },
+
+        {
+            title: "Midnight Highway",
+            artist: "Routier 87",
+            audio: ""
+        },
+
+        {
+            title: "French Roads",
+            artist: "Routier 87",
+            audio: ""
+        },
+
+        {
+            title: "Truckers Night",
+            artist: "Routier 87",
+            audio: ""
+        },
+
+        {
+            title: "Blue Lights",
+            artist: "Routier 87",
+            audio: ""
+        },
+
+        {
+            title: "Last Destination",
+            artist: "Routier 87",
+            audio: ""
+        },
+
+        {
+            title: "Highway Dreams",
+            artist: "Routier 87",
+            audio: ""
+        },
+
+        {
+            title: "Night Transport",
+            artist: "Routier 87",
+            audio: ""
+        },
+
+        {
+            title: "Road Trip",
+            artist: "Routier 87",
+            audio: ""
+        },
+
+        {
+            title: "Sunrise Road",
+            artist: "Routier 87",
+            audio: ""
+        },
+
+        {
+            title: "Deep Night",
+            artist: "Routier 87",
+            audio: ""
+        },
+
+        {
+            title: "The Last Truck",
+            artist: "Routier 87",
+            audio: ""
+        },
+
+        {
+            title: "R87 Original",
+            artist: "Routier 87",
+            audio: ""
+        }
+
+    ];
+
+
+    let currentUser = null;
+
+    let statistics = {
+        likes: 0,
+        dislikes: 0,
+        comments: 0,
+        downloads: 0
+    };
+
+
+    /*
+    ==========================================
+        CONNEXION
+    ==========================================
+    */
+
+    function login() {
+
+        const username =
+            document
+            .getElementById("username")
+            .value
+            .trim();
+
+        const password =
+            document
+            .getElementById("password")
+            .value;
+
+        const error =
+            document.getElementById("loginError");
+
+
+        if (!users[username]) {
+
+            error.textContent =
+                "❌ Identifiant incorrect.";
+
+            return;
+        }
+
+
+        if (users[username].password !== password) {
+
+            error.textContent =
+                "❌ Mot de passe incorrect.";
+
+            return;
+        }
+
+
+        currentUser = users[username];
+
+        document
+            .getElementById("loginPage")
+            .style.display = "none";
+
+
+        document
+            .getElementById("app")
+            .style.display = "block";
+
+
+        document
+            .getElementById("currentUser")
+            .textContent =
+            currentUser.name;
+
+
+        document
+            .getElementById("welcome")
+            .textContent =
+            "Bonjour " + currentUser.name + ".";
+
+
+        if (currentUser.creator) {
+
+            document
+                .getElementById("creator")
+                .style.display = "block";
+
+        }
+
+
+        renderMusic();
+
+    }
+
+
+    /*
+    ==========================================
+        DÉCONNEXION
+    ==========================================
+    */
+
+    function logout() {
+
+        currentUser = null;
+
+        document
+            .getElementById("app")
+            .style.display = "none";
+
+        document
+            .getElementById("loginPage")
+            .style.display = "flex";
+
+        document
+            .getElementById("username")
+            .value = "";
+
+        document
+            .getElementById("password")
+            .value = "";
+
+    }
+
+
+    /*
+    ==========================================
+        AFFICHAGE MUSIQUES
+    ==========================================
+    */
+
+    function renderMusic(list = music) {
+
+        const grid =
+            document.getElementById("musicGrid");
+
+
+        grid.innerHTML = "";
+
+
+        list.forEach((track, index) => {
+
+            const card =
+                document.createElement("article");
+
+            card.className =
+                "music-card";
+
+
+            card.innerHTML = `
+
+                <div class="album">
+
+                    <button
+                        class="play-button"
+                        onclick="playMusic(${index})"
+                    >
+                        ▶
+                    </button>
+
+                </div>
+
+
+                <div class="music-title">
+                    ${track.title}
+                </div>
+
+                <div class="music-artist">
+                    ${track.artist}
+                </div>
+
+
+                <div class="actions">
+
+                    <button
+                        class="action play-small"
+                        onclick="playMusic(${index})"
+                    >
+                        ▶
+                    </button>
+
+                    <button
+                        class="action"
+                        onclick="likeMusic('${track.title}')"
+                    >
+                        👍
+                    </button>
+
+                    <button
+                        class="action"
+                        onclick="dislikeMusic('${track.title}')"
+                    >
+                        👎
+                    </button>
+
+                    <button
+                        class="action"
+                        onclick="commentMusic('${track.title}')"
+                    >
+                        💬
+                    </button>
+
+                </div>
+
+            `;
+
+
+            grid.appendChild(card);
+
+        });
+
+
+        document
+            .getElementById("statMusic")
+            .textContent =
+            music.length;
+
+    }
+
+
+    /*
+    ==========================================
+        LECTEUR
+    ==========================================
+    */
+
+    function playMusic(index) {
+
+        const track =
+            music[index];
+
+
+        if (!track.audio) {
+
+            alert(
+                "🎵 Cette musique est une démonstration. " +
+                "Ajoute ton fichier audio dans la version serveur."
+            );
+
+            return;
+        }
+
+
+        const audio =
+            document.getElementById("audio");
+
+
+        audio.src =
+            track.audio;
+
+
+        audio.play();
+
+
+        document
+            .getElementById("player")
+            .style.display = "block";
+
+
+        document
+            .getElementById("playerTitle")
+            .textContent =
+            track.title;
+
+    }
+
+
+    /*
+    ==========================================
+        LIKE
+    ==========================================
+    */
+
+    function likeMusic(title) {
+
+        statistics.likes++;
+
+        document
+            .getElementById("statLikes")
+            .textContent =
+            statistics.likes;
+
+
+        addActivity(
+            currentUser.name,
+            "a aimé",
+            title
+        );
+
+    }
+
+
+    /*
+    ==========================================
+        DISLIKE
+    ==========================================
+    */
+
+    function dislikeMusic(title) {
+
+        statistics.dislikes++;
+
+        document
+            .getElementById("statDislikes")
+            .textContent =
+            statistics.dislikes;
+
+
+        addActivity(
+            currentUser.name,
+            "n'a pas aimé",
+            title
+        );
+
+    }
+
+
+    /*
+    ==========================================
+        COMMENTAIRE
+    ==========================================
+    */
+
+    function commentMusic(title) {
+
+        const message =
+            prompt(
+                "💬 Ton commentaire sur : " +
+                title
+            );
+
+
+        if (!message) {
+            return;
+        }
+
+
+        statistics.comments++;
+
+
+        document
+            .getElementById("statComments")
+            .textContent =
+            statistics.comments;
+
+
+        addActivity(
+            currentUser.name,
+            "a commenté",
+            title + " : " + message
+        );
+
+
+        alert(
+            "✅ Ton commentaire a été envoyé au Creator Studio."
+        );
+
+    }
+
+
+    /*
+    ==========================================
+        ACTIVITÉ CRÉATEUR
+    ==========================================
+    */
+
+    function addActivity(
+        username,
+        action,
+        text
+    ) {
+
+        const messages =
+            document.getElementById("messages");
+
+
+        const message =
+            document.createElement("div");
+
+
+        message.className =
+            "message";
+
+
+        message.innerHTML = `
+
+            <strong>
+                ${username}
+            </strong>
+
+            <p>
+                ${action} :
+                ${text}
+            </p>
+
+            <small>
+                À l'instant
+            </small>
+
+        `;
+
+
+        messages.prepend(message);
+
+    }
+
+
+    /*
+    ==========================================
+        RECHERCHE
+    ==========================================
+    */
+
+    function searchMusic() {
+
+        const query =
+            document
+            .getElementById("search")
+            .value
+            .toLowerCase();
+
+
+        const result =
+            music.filter(track =>
+
+                track.title
+                    .toLowerCase()
+                    .includes(query)
+
+                ||
+
+                track.artist
+                    .toLowerCase()
+                    .includes(query)
+
+            );
+
+
+        renderMusic(result);
+
+    }
+
+</script>
+
+</body>
+</html>
