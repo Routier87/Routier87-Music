@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Routier 87 Music Hub — V7</title>
+<title>Routier 87 Music Hub — V8</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 5%,#342060,transparent 35%),radial-gradient(circle at 90% 15%,#06435d,transparent 32%),#06070d;color:#fff;font-family:Arial,sans-serif}button,input,select{font:inherit}button{cursor:pointer}.hidden{display:none!important}
 .login{min-height:100vh;display:grid;place-items:center;padding:20px}.box,.panel,.card{background:#0d1119;border:1px solid #2a3040;border-radius:18px}.box{width:min(460px,100%);padding:35px;box-shadow:0 30px 100px #000}.logo,.mini{display:grid;place-items:center;background:linear-gradient(135deg,#7c5cff,#31a9ff);font-weight:900}.logo{width:68px;height:68px;border-radius:18px}.k{color:#b0a2ff;font-size:10px;font-weight:900;letter-spacing:3px;margin-top:18px}h1{font-size:44px;margin:8px 0}p{color:#99a1b3;line-height:1.5}label{display:block;font-size:10px;font-weight:900;margin:15px 0 7px}input,select{width:100%;padding:13px;background:#080b12;color:#fff;border:1px solid #2a3040;border-radius:10px}.primary,.publish{width:100%;margin-top:18px;padding:14px;border:0;border-radius:11px;background:linear-gradient(135deg,#7c5cff,#31a9ff);color:#fff;font-weight:900}.error{color:#ff607f;font-size:12px;min-height:18px}
@@ -12,7 +12,7 @@ main{width:90%;max-width:1450px;margin:auto;padding:30px 0 150px}.hero{min-heigh
 .creator{margin-top:60px}.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin:18px 0}.stat{padding:17px;background:#0d1119;border:1px solid #2a3040;border-radius:14px}.stat b{display:block;font-size:26px}.stat span{font-size:9px;color:#99a1b3}.creatorGrid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.panel{padding:23px}.drop{border:1px dashed #7c5cffaa;border-radius:15px;padding:30px;text-align:center;background:#7c5cff09;margin-bottom:15px}.drop strong,.drop small{display:block}.drop small{color:#99a1b3;margin-top:7px}.fileName{color:#b8abff;font-size:12px;font-weight:900;margin-top:8px}.preview{display:none;margin-bottom:12px}.preview audio,.player audio{width:100%}.formGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.full,.publish{grid-column:1/-1}.activity{max-height:450px;overflow:auto}.event{padding:12px 0;border-bottom:1px solid #2a3040}.event b{font-size:12px}.event div{font-size:12px}.event small{font-size:9px;color:#99a1b3}.player{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);z-index:30;width:min(1050px,calc(100% - 24px));padding:12px 15px;background:#080a10f5;border:1px solid #2a3040;border-radius:16px;box-shadow:0 20px 60px #000}.pt{font-size:13px;font-weight:900}.pa{font-size:10px;color:#99a1b3;margin:3px 0 7px}.toast{position:fixed;right:18px;bottom:105px;z-index:100;padding:13px 16px;background:#10131cf5;border:1px solid #2a3040;border-radius:10px;max-width:450px}.modalBack{position:fixed;inset:0;z-index:50;display:none;place-items:center;background:#000b;padding:20px}.modal{width:min(550px,100%);padding:23px;max-height:85vh;overflow:auto;background:#10131c;border:1px solid #2a3040;border-radius:18px}.modalHead{display:flex;justify-content:space-between}.comment{padding:12px 0;border-bottom:1px solid #2a3040}.comment b{font-size:12px}.comment div{font-size:13px;margin-top:4px}.commentForm{display:flex;gap:7px;margin-top:14px}.commentForm button{border:0;border-radius:9px;padding:0 15px;background:#7c5cff;color:#fff}
 .status{margin-top:10px;padding:10px;border-radius:9px;background:#080b12;border:1px solid #2a3040;font-size:11px;color:#99a1b3}.status.ok{color:#9dffbd}.status.bad{color:#ff8298}
 @media(max-width:1150px){.grid{grid-template-columns:repeat(4,1fr)}.stats{grid-template-columns:repeat(3,1fr)}}@media(max-width:900px){.grid{grid-template-columns:repeat(3,1fr)}.creatorGrid{grid-template-columns:1fr}}@media(max-width:650px){main{width:calc(100% - 24px)}.grid{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:repeat(2,1fr)}.formGrid{grid-template-columns:1fr}.full,.publish{grid-column:1}.hero{padding:28px}.head{display:block}.search{max-width:none;margin-top:10px}}
-</style>
+.syncBadge{font-size:9px;font-weight:900;padding:6px 8px;border-radius:8px;background:#ffffff10;color:#9dffbd;border:1px solid #2a3040;margin-right:6px}.syncBadge.off{color:#ffcf7a}.cloudSetup{margin-bottom:18px;display:flex;gap:15px;align-items:center;justify-content:space-between}.cloudForm{display:flex;gap:7px;flex:1;max-width:720px}.cloudForm input{min-width:0}.primarySmall{border:0;background:linear-gradient(135deg,#7c5cff,#31a9ff)}.profilePanel{margin-bottom:18px}@media(max-width:800px){.cloudSetup{display:block}.cloudForm{max-width:none;margin-top:10px;flex-direction:column}}</style>
 </head>
 <body>
 
@@ -26,13 +26,15 @@ main{width:90%;max-width:1450px;margin:auto;padding:30px 0 150px}.hero{min-heigh
 
 <div id="app" class="hidden">
 <header><div class="brand"><div class="mini">R87</div><div><b>Routier 87 Music Hub</b><small>PRIVATE MUSIC PLATFORM</small></div></div>
-<div><span id="who"></span> <button id="studioBtn" class="btn hidden">👑 Creator Studio</button> <button id="logout" class="btn">Déconnexion</button></div></header>
+<div><span id="syncBadge" class="syncBadge">LOCAL</span> <span id="who"></span> <button id="exportBtn" class="btn" title="Exporter les données">📦 Export</button> <button id="importBtn" class="btn" title="Restaurer une sauvegarde">↩️ Restaurer</button> <button id="studioBtn" class="btn hidden">👑 Creator Studio</button> <button id="logout" class="btn">Déconnexion</button></div></header>
 <main>
+<section id="cloudSetup" class="panel cloudSetup hidden"><div><h3>☁️ Connexion cloud</h3><p>Renseigne ton URL Supabase et ta clé <b>publishable/anon</b>. Ne mets jamais une clé <b>service_role</b> dans ce fichier.</p></div><div class="cloudForm"><input id="supabaseUrl" placeholder="https://xxxxx.supabase.co"><input id="supabaseKey" placeholder="sb_publishable_... / anon key"><button id="saveCloud" class="btn primarySmall">Connecter</button><button id="disableCloud" class="btn">Mode local</button></div><div id="cloudStatus" class="status">Cloud non configuré.</div></section>
 <section class="hero"><div><div class="k">ESPACE MUSICAL</div><h2 id="welcome"></h2><p>Écoute, commente, réagis et télécharge.</p></div></section>
 <div class="head"><div><h2>Ma bibliothèque</h2><p id="count"></p></div><input id="search" class="search" placeholder="🔎 Rechercher"></div>
 <div id="grid" class="grid"></div>
 
 <section id="creator" class="creator hidden">
+<div class="panel profilePanel"><h3>👤 Profil synchronisé</h3><div class="formGrid"><div><label>NOM AFFICHÉ</label><input id="profileDisplay"></div><div><label>AVATAR URL</label><input id="profileAvatar" placeholder="https://..."></div><div class="full"><label>BIO</label><input id="profileBio" maxlength="300" placeholder="Présentation..."></div><button id="saveProfile" class="publish">💾 ENREGISTRER MON PROFIL</button></div></div>
 <h2>👑 Creator Studio — Routier 87</h2><p>Publication directe sur le profil sélectionné. Chaque musique possède sa <b>propre pochette indépendante</b>. Tu peux aussi <b>modifier ou supprimer</b> les sons déjà publiés.</p>
 <div class="stats"><div class="stat"><b id="sTracks">0</b><span>Musiques</span></div><div class="stat"><b id="sProfiles">0</b><span>Profils</span></div><div class="stat"><b id="sLikes">0</b><span>Likes</span></div><div class="stat"><b id="sDislikes">0</b><span>Dislikes</span></div><div class="stat"><b id="sComments">0</b><span>Commentaires</span></div><div class="stat"><b id="sDownloads">0</b><span>Téléchargements</span></div></div>
 <div class="creatorGrid">
@@ -80,464 +82,349 @@ main{width:90%;max-width:1450px;margin:auto;padding:30px 0 150px}.hero{min-heigh
 
 <div id="modalBack" class="modalBack"><div class="modal"><div class="modalHead"><h3 id="modalTitle"></h3><button id="closeModal" class="btn">✕</button></div><div id="commentList"></div><div class="commentForm"><input id="commentText" maxlength="500" placeholder="Ton commentaire..."><button id="sendComment">Envoyer</button></div></div></div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 "use strict";
 
+/* =========================
+   ROUTIER 87 — V8
+   Cloud: Supabase
+   Local: localStorage + IndexedDB
+   ========================= */
+
 const USERS={
-Routier87:{password:"2001",display:"Routier 87",creator:true},
-Benjamin:{password:"2026",display:"Benjamin"},Samantha:{password:"2026",display:"Samantha"},
-Océane:{password:"2026",display:"Océane"},Chico:{password:"2026",display:"Chico"},
-Tristan:{password:"2026",display:"Tristan"},Manon:{password:"2026",display:"Manon"},
-Éric:{password:"2026",display:"Éric"},Mr_Wolf:{password:"2026",display:"Mr_Wolf"},
-"F-O-T":{password:"2025",display:"Far Motors Transport"}
+  Routier87:{password:"2001",display:"Routier 87",creator:true},
+  Benjamin:{password:"2026",display:"Benjamin"},Samantha:{password:"2026",display:"Samantha"},
+  Océane:{password:"2026",display:"Océane"},Chico:{password:"2026",display:"Chico"},
+  Tristan:{password:"2026",display:"Tristan"},Manon:{password:"2026",display:"Manon"},
+  Éric:{password:"2026",display:"Éric"},Mr_Wolf:{password:"2026",display:"Mr_Wolf"},
+  "F-O-T":{password:"2025",display:"Far Motors Transport"}
 };
 
-const DB_NAME="Routier87MusicV4";
-const DB_VERSION=1;
-const STORE="files";
-let db=null,currentUser=null,tracks=[],reactions={},comments={},activity=[];
-let selectedAudio=null,selectedCover=null,currentTrackId=null,currentURL=null;
-const memoryBlobs=new Map();
-const coverURLs=new Set();
+const DB_NAME="Routier87MusicV8",DB_VERSION=2,STORE="files";
+const CLOUD_KEY="r87v8_cloud_config";
+let db=null,currentUser=null,tracks=[],reactions={},comments={},activity=[],profiles={};
+let selectedAudio=null,currentTrackId=null,currentURL=null;
+const memoryBlobs=new Map(),coverURLs=new Set();
+let sb=null,realtimeChannel=null,cloudEnabled=false,syncTimer=null;
 
 const $=id=>document.getElementById(id);
+const esc=v=>String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;");
+const dest=v=>v==="ALL"?"TOUS LES PROFILS":profiles[v]?.display_name||USERS[v]?.display||v;
 
 function toast(msg){
-document.querySelector(".toast")?.remove();
-const d=document.createElement("div");d.className="toast";d.textContent=msg;document.body.appendChild(d);
-setTimeout(()=>d.remove(),4500);
+  document.querySelector(".toast")?.remove();
+  const d=document.createElement("div");d.className="toast";d.textContent=msg;document.body.appendChild(d);
+  setTimeout(()=>d.remove(),4500);
 }
-function esc(v){return String(v).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;")}
-function dest(v){return v==="ALL"?"TOUS LES PROFILS":USERS[v]?.display||v}
+function setSync(text,ok=true){
+  const b=$("syncBadge");b.textContent=text;b.className="syncBadge"+(ok?"":" off");
+}
+function cloudConfig(){try{return JSON.parse(localStorage.getItem(CLOUD_KEY)||"null")}catch{return null}}
 
 function openDB(){
-return new Promise((resolve,reject)=>{
-try{
-const request=indexedDB.open(DB_NAME,DB_VERSION);
-request.onupgradeneeded=e=>{
-const database=e.target.result;
-if(!database.objectStoreNames.contains(STORE))database.createObjectStore(STORE,{keyPath:"id"});
-};
-request.onsuccess=e=>{db=e.target.result;resolve(true)};
-request.onerror=()=>reject(request.error);
-}catch(e){reject(e)}
-});
+ return new Promise((resolve,reject)=>{
+  try{
+   const request=indexedDB.open(DB_NAME,DB_VERSION);
+   request.onupgradeneeded=e=>{const d=e.target.result;if(!d.objectStoreNames.contains(STORE))d.createObjectStore(STORE,{keyPath:"id"})};
+   request.onsuccess=e=>{db=e.target.result;resolve(true)};request.onerror=()=>reject(request.error);
+  }catch(e){reject(e)}
+ });
 }
-
-/* Double stockage :
-   1. mémoire immédiate = lecture instantanée après publication
-   2. IndexedDB = conservation après actualisation
-*/
 function storeBlob(id,blob){
-memoryBlobs.set(id,blob);
-if(!db)return Promise.resolve();
-return new Promise((resolve,reject)=>{
-try{
-const tx=db.transaction(STORE,"readwrite");
-tx.objectStore(STORE).put({id,blob});
-tx.oncomplete=resolve;
-tx.onerror=()=>reject(tx.error);
-}catch(e){resolve()}
-});
+ memoryBlobs.set(id,blob); if(!db)return Promise.resolve();
+ return new Promise((resolve,reject)=>{try{const tx=db.transaction(STORE,"readwrite");tx.objectStore(STORE).put({id,blob});tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error)}catch(e){resolve()}});
 }
 function readBlob(id){
-if(memoryBlobs.has(id))return Promise.resolve(memoryBlobs.get(id));
-if(!db)return Promise.resolve(null);
-return new Promise(resolve=>{
-try{
-const req=db.transaction(STORE,"readonly").objectStore(STORE).get(id);
-req.onsuccess=()=>{const b=req.result?.blob||null;if(b)memoryBlobs.set(id,b);resolve(b)};
-req.onerror=()=>resolve(null);
-}catch(e){resolve(null)}
-});
+ if(memoryBlobs.has(id))return Promise.resolve(memoryBlobs.get(id)); if(!db)return Promise.resolve(null);
+ return new Promise(resolve=>{try{const req=db.transaction(STORE,"readonly").objectStore(STORE).get(id);req.onsuccess=()=>{const b=req.result?.blob||null;if(b)memoryBlobs.set(id,b);resolve(b)};req.onerror=()=>resolve(null)}catch(e){resolve(null)}});
 }
 function removeBlob(id){
-memoryBlobs.delete(id);
-if(!db)return Promise.resolve();
-return new Promise(resolve=>{
-try{
-const tx=db.transaction(STORE,"readwrite");tx.objectStore(STORE).delete(id);tx.oncomplete=resolve;tx.onerror=resolve;
-}catch(e){resolve()}
-});
+ memoryBlobs.delete(id);if(!db)return Promise.resolve();
+ return new Promise(resolve=>{try{const tx=db.transaction(STORE,"readwrite");tx.objectStore(STORE).delete(id);tx.oncomplete=resolve;tx.onerror=resolve}catch(e){resolve()}});
 }
 
-function loadData(){
-tracks=JSON.parse(localStorage.getItem("r87v4_tracks")||"[]");
-reactions=JSON.parse(localStorage.getItem("r87v4_reactions")||"{}");
-comments=JSON.parse(localStorage.getItem("r87v4_comments")||"{}");
-activity=JSON.parse(localStorage.getItem("r87v4_activity")||"[]");
+function loadLocal(){
+ tracks=JSON.parse(localStorage.getItem("r87v8_tracks")||localStorage.getItem("r87v4_tracks")||"[]");
+ reactions=JSON.parse(localStorage.getItem("r87v8_reactions")||localStorage.getItem("r87v4_reactions")||"{}");
+ comments=JSON.parse(localStorage.getItem("r87v8_comments")||localStorage.getItem("r87v4_comments")||"{}");
+ activity=JSON.parse(localStorage.getItem("r87v8_activity")||localStorage.getItem("r87v4_activity")||"[]");
+ profiles=JSON.parse(localStorage.getItem("r87v8_profiles")||"{}");
+ Object.entries(USERS).forEach(([id,u])=>profiles[id]??={id,display_name:u.display,creator:!!u.creator,avatar_url:"",bio:""});
 }
-function saveData(){
-localStorage.setItem("r87v4_tracks",JSON.stringify(tracks));
-localStorage.setItem("r87v4_reactions",JSON.stringify(reactions));
-localStorage.setItem("r87v4_comments",JSON.stringify(comments));
-localStorage.setItem("r87v4_activity",JSON.stringify(activity));
+function saveLocal(){
+ localStorage.setItem("r87v8_tracks",JSON.stringify(tracks));
+ localStorage.setItem("r87v8_reactions",JSON.stringify(reactions));
+ localStorage.setItem("r87v8_comments",JSON.stringify(comments));
+ localStorage.setItem("r87v8_activity",JSON.stringify(activity));
+ localStorage.setItem("r87v8_profiles",JSON.stringify(profiles));
+}
+
+async function initCloud(){
+ const cfg=cloudConfig();
+ if(!cfg?.url||!cfg?.key){cloudEnabled=false;setSync("LOCAL",false);return false}
+ try{
+  sb=window.supabase.createClient(cfg.url,cfg.key,{auth:{persistSession:false}});
+  const {error}=await sb.from("profiles").select("id").limit(1);
+  if(error)throw error;
+  cloudEnabled=true;setSync("☁️ EN LIGNE",true);
+  await cloudPull();
+  subscribeRealtime();
+  return true;
+ }catch(e){
+  console.warn("Cloud indisponible",e);cloudEnabled=false;setSync("LOCAL • cloud hors ligne",false);
+  $("cloudStatus").textContent="❌ Cloud inaccessible : "+e.message;
+  return false;
+ }
+}
+async function cloudPull(){
+ if(!cloudEnabled)return;
+ const [p,t,r,c,a]=await Promise.all([
+  sb.from("profiles").select("*").order("id"),
+  sb.from("tracks").select("*").order("created_at",{ascending:false}),
+  sb.from("reactions").select("*"),
+  sb.from("comments").select("*").order("created_at",{ascending:true}),
+  sb.from("activity").select("*").order("created_at",{ascending:false}).limit(100)
+ ]);
+ for(const x of [p,t,r,c,a])if(x.error)throw x.error;
+ profiles=Object.fromEntries((p.data||[]).map(x=>[x.id,x]));
+ tracks=(t.data||[]).map(x=>({...x,audioId:x.audio_path,coverId:x.cover_path,createdAt:new Date(x.created_at).getTime()}));
+ reactions={};(r.data||[]).forEach(x=>(reactions[x.track_id]??={})[x.user_id]=x.type);
+ comments={};(c.data||[]).forEach(x=>(comments[x.track_id]??=[]).push({id:x.id,user:x.user_name,user_id:x.user_id,text:x.text,created_at:x.created_at}));
+ activity=(a.data||[]).map(x=>({user:x.user_name,user_id:x.user_id,action:x.action,text:x.text,date:new Date(x.created_at).toLocaleString("fr-FR")}));
+ saveLocal();await render();updateStats();renderActivity();
+}
+function subscribeRealtime(){
+ if(!sb)return;
+ if(realtimeChannel)sb.removeChannel(realtimeChannel);
+ realtimeChannel=sb.channel("r87-v8-sync")
+ .on("postgres_changes",{event:"*",schema:"public"},async()=>{clearTimeout(syncTimer);syncTimer=setTimeout(async()=>{try{await cloudPull()}catch(e){console.warn(e)}},180)})
+ .subscribe();
+}
+
+async function cloudUpload(bucket,path,file){
+ const {error}=await sb.storage.from(bucket).upload(path,file,{upsert:true,contentType:file.type||undefined});
+ if(error)throw error;return path;
+}
+function cloudUrl(bucket,path){
+ if(!path)return null;return sb.storage.from(bucket).getPublicUrl(path).data.publicUrl;
+}
+async function cloudInsertTrack(t){
+ if(!cloudEnabled)return;
+ const row={id:t.id,title:t.title,artist:t.artist,target:t.target,audio_path:t.audioId,cover_path:t.coverId,filename:t.filename,mime_type:t.mimeType,downloads:t.downloads||0,created_at:new Date(t.createdAt||Date.now()).toISOString(),updated_at:new Date().toISOString()};
+ const {error}=await sb.from("tracks").upsert(row);if(error)throw error;
+}
+async function cloudDeleteTrack(t){
+ if(!cloudEnabled)return;
+ const {error}=await sb.from("tracks").delete().eq("id",t.id);if(error)throw error;
+ const paths=[t.audioId,t.coverId].filter(Boolean);
+ if(paths.length){await sb.storage.from("audio").remove(paths.filter(x=>x.includes("/")).length?[]:[]).catch(()=>{});/* objects are removed below when possible */}
+}
+async function cloudSaveReaction(trackId,type){
+ if(!cloudEnabled)return;
+ if(type) {const {error}=await sb.from("reactions").upsert({track_id:trackId,user_id:currentUser.id,type,updated_at:new Date().toISOString()});if(error)throw error}
+ else {const {error}=await sb.from("reactions").delete().eq("track_id",trackId).eq("user_id",currentUser.id);if(error)throw error}
+}
+async function cloudSaveComment(trackId,c){
+ if(!cloudEnabled)return;
+ const {error}=await sb.from("comments").insert({track_id:trackId,user_id:currentUser.id,user_name:currentUser.display,text:c.text});if(error)throw error;
+}
+async function cloudActivity(action,text){
+ if(!cloudEnabled)return;
+ const {error}=await sb.from("activity").insert({user_id:currentUser.id,user_name:currentUser.display,action,text});if(error)console.warn(error);
+}
+async function addActivity(user,action,text){
+ activity.unshift({user,action,text,date:new Date().toLocaleString("fr-FR")});activity=activity.slice(0,100);saveLocal();renderActivity();
+ try{if(cloudEnabled)await cloudActivity(action,text)}catch(e){console.warn(e)}
+}
+async function syncProfile(){
+ const id=currentUser.id, old=profiles[id]||{};
+ const row={id,display_name:$("profileDisplay").value.trim()||currentUser.display,creator:!!currentUser.creator,avatar_url:$("profileAvatar").value.trim(),bio:$("profileBio").value.trim(),password:old.password||USERS[id]?.password||"",updated_at:new Date().toISOString()};
+ profiles[id]=row;currentUser.display=row.display_name;saveLocal();
+ if(cloudEnabled){const {error}=await sb.from("profiles").upsert(row);if(error)throw error}
+ $("who").textContent=currentUser.display;$("welcome").textContent="Bonjour "+currentUser.display;
+ toast("✅ Profil synchronisé.");
 }
 
 function login(){
-const id=$("loginId").value.trim(),pw=$("loginPw").value;
-if(!USERS[id]){$("loginError").textContent="❌ Identifiant incorrect.";return}
-if(USERS[id].password!==pw){$("loginError").textContent="❌ Mot de passe incorrect.";return}
-currentUser={id,...USERS[id]};sessionStorage.setItem("r87_current_user_v4",JSON.stringify(currentUser));showApp();
+ const id=$("loginId").value.trim(),pw=$("loginPw").value;
+ const p=profiles[id]||USERS[id];
+ if(!p){$("loginError").textContent="❌ Identifiant incorrect.";return}
+ if(p.password!==pw && p.password!==undefined){$("loginError").textContent="❌ Mot de passe incorrect.";return}
+ currentUser={id,display:p.display_name||p.display,creator:!!p.creator,password:p.password};
+ sessionStorage.setItem("r87_current_user_v8",JSON.stringify(currentUser));showApp();
 }
 function showApp(){
-$("loginPage").classList.add("hidden");$("app").classList.remove("hidden");
-$("who").textContent=currentUser.display;$("welcome").textContent="Bonjour "+currentUser.display+".";
-if(currentUser.creator){$("creator").classList.remove("hidden");$("studioBtn").classList.remove("hidden")}
-render();updateStats();renderActivity();
+ $("loginPage").classList.add("hidden");$("app").classList.remove("hidden");
+ $("who").textContent=currentUser.display;$("welcome").textContent="Bonjour "+currentUser.display;
+ if(currentUser.creator){$("creator").classList.remove("hidden");$("studioBtn").classList.remove("hidden")}
+ const p=profiles[currentUser.id]||{};$("profileDisplay").value=p.display_name||currentUser.display;$("profileAvatar").value=p.avatar_url||"";$("profileBio").value=p.bio||"";
+ render();updateStats();renderActivity();
 }
-
 function canSee(t){return currentUser.creator||t.target==="ALL"||t.target===currentUser.id}
 
 async function render(){
-for(const u of coverURLs)URL.revokeObjectURL(u);coverURLs.clear();
-const q=$("search").value.trim().toLowerCase();
-const list=tracks.filter(canSee).filter(t=>!q||t.title.toLowerCase().includes(q)||t.artist.toLowerCase().includes(q));
-$("count").textContent=list.length+" "+(list.length>1?"musiques":"musique");
-const grid=$("grid");grid.innerHTML="";
-if(!list.length){grid.innerHTML='<div class="empty">🎵<br><br>Aucune musique disponible.</div>';return}
-for(const t of list){
-let cover="";
-if(t.coverId){const b=await readBlob(t.coverId);if(b){cover=URL.createObjectURL(b);coverURLs.add(cover)}}
-const card=document.createElement("article");card.className="card";
-card.innerHTML=`<div class="cover">${cover?`<img src="${cover}" alt="">`:'<div class="sym">♫</div>'}<button class="play" data-play="${t.id}">▶</button></div>
-<div class="title">${esc(t.title)}</div><div class="artist">${esc(t.artist)}</div><span class="badge">👤 ${esc(dest(t.target))}</span>
-<div class="actions"><button class="act" data-play="${t.id}">▶</button><button class="act" data-like="${t.id}">👍</button><button class="act" data-dislike="${t.id}">👎</button><button class="act" data-comment="${t.id}">💬</button></div>
-<button class="act download" data-download="${t.id}">⬇️ Télécharger</button>
-${currentUser.creator?`<button class="act" data-edit="${t.id}">✏️ Modifier</button><button class="act delete" data-delete="${t.id}">🗑️ Supprimer</button>`:""}`;
-grid.appendChild(card);
-}
-grid.querySelectorAll("[data-play]").forEach(b=>b.onclick=()=>playTrack(b.dataset.play));
-grid.querySelectorAll("[data-like]").forEach(b=>b.onclick=()=>react(b.dataset.like,"like"));
-grid.querySelectorAll("[data-dislike]").forEach(b=>b.onclick=()=>react(b.dataset.dislike,"dislike"));
-grid.querySelectorAll("[data-comment]").forEach(b=>b.onclick=()=>openComments(b.dataset.comment));
-grid.querySelectorAll("[data-download]").forEach(b=>b.onclick=()=>downloadTrack(b.dataset.download));
-grid.querySelectorAll("[data-delete]").forEach(b=>b.onclick=()=>deleteTrack(b.dataset.delete));
-grid.querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>openEdit(b.dataset.edit));
+ for(const u of coverURLs)URL.revokeObjectURL(u);coverURLs.clear();
+ const q=$("search").value.trim().toLowerCase(),list=tracks.filter(canSee).filter(t=>!q||t.title.toLowerCase().includes(q)||t.artist.toLowerCase().includes(q));
+ $("count").textContent=list.length+" "+(list.length>1?"musiques":"musique");
+ const grid=$("grid");grid.innerHTML="";
+ if(!list.length){grid.innerHTML='<div class="empty">🎵<br><br>Aucune musique disponible.</div>';return}
+ for(const t of list){
+  let cover="";
+  if(t.coverId&&!cloudEnabled){const b=await readBlob(t.coverId);if(b){cover=URL.createObjectURL(b);coverURLs.add(cover)}}
+  if(t.coverId&&cloudEnabled)cover=cloudUrl("covers",t.coverId);
+  const card=document.createElement("article");card.className="card";
+  card.innerHTML=`<div class="cover">${cover?`<img src="${esc(cover)}" alt="">`:'<div class="sym">♫</div>'}<button class="play" data-play="${t.id}">▶</button></div>
+  <div class="title">${esc(t.title)}</div><div class="artist">${esc(t.artist)}</div><span class="badge">👤 ${esc(dest(t.target))}</span>
+  <div class="actions"><button class="act" data-play="${t.id}">▶</button><button class="act" data-like="${t.id}">👍</button><button class="act" data-dislike="${t.id}">👎</button><button class="act" data-comment="${t.id}">💬</button></div>
+  <button class="act download" data-download="${t.id}">⬇️ Télécharger</button>
+  ${currentUser.creator?`<button class="act" data-edit="${t.id}">✏️ Modifier</button><button class="act delete" data-delete="${t.id}">🗑️ Supprimer</button>`:""}`;
+  grid.appendChild(card);
+ }
+ grid.querySelectorAll("[data-play]").forEach(b=>b.onclick=()=>playTrack(b.dataset.play));
+ grid.querySelectorAll("[data-like]").forEach(b=>b.onclick=()=>react(b.dataset.like,"like"));
+ grid.querySelectorAll("[data-dislike]").forEach(b=>b.onclick=()=>react(b.dataset.dislike,"dislike"));
+ grid.querySelectorAll("[data-comment]").forEach(b=>b.onclick=()=>openComments(b.dataset.comment));
+ grid.querySelectorAll("[data-download]").forEach(b=>b.onclick=()=>downloadTrack(b.dataset.download));
+ grid.querySelectorAll("[data-delete]").forEach(b=>b.onclick=()=>deleteTrack(b.dataset.delete));
+ grid.querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>openEdit(b.dataset.id||b.dataset.edit));
 }
 
-/* CORRECTION MAJEURE :
-   On ne dépend plus uniquement d'IndexedDB pour lancer la musique.
-   Le fichier sélectionné est gardé en mémoire immédiatement,
-   puis sauvegardé dans IndexedDB.
-*/
+async function getTrackBlob(t){
+ if(!cloudEnabled)return readBlob(t.audioId);
+ const {data,error}=await sb.storage.from("audio").download(t.audioId);
+ if(error)throw error;return data;
+}
 async function playTrack(id){
-const track=tracks.find(t=>t.id===id);
-if(!track){toast("❌ Musique introuvable.");return}
-
-const player=$("mainPlayer");
-const status=$("playerStatus");
-status.textContent="⏳ Chargement de "+track.title+"…";
-
-try{
-const blob=await readBlob(track.audioId);
-if(!blob){
-status.textContent="❌ Fichier audio introuvable.";
-toast("❌ Le fichier audio n'a pas été retrouvé.");
-return;
-}
-
-if(currentURL){URL.revokeObjectURL(currentURL);currentURL=null}
-
-const url=URL.createObjectURL(blob);
-currentURL=url;
-
-$("playerTitle").textContent=track.title;
-$("playerArtist").textContent=track.artist;
-
-player.pause();
-player.removeAttribute("src");
-player.load();
-
-player.src=url;
-player.preload="auto";
-
-player.onloadedmetadata=()=>{
-status.className="status ok";
-status.textContent="✅ Audio chargé — "+Math.round((player.duration||0))+" seconde(s).";
-};
-player.onerror=()=>{
-status.className="status bad";
-status.textContent="❌ Le navigateur ne peut pas lire ce format audio.";
-};
-
-player.load();
-
-try{
-await player.play();
-status.className="status ok";
-status.textContent="▶️ Lecture en cours.";
-}catch(e){
-status.className="status ok";
-status.textContent="✅ Audio chargé. Appuie sur ▶️ dans la barre du lecteur.";
-}
-}catch(e){
-console.error(e);
-status.className="status bad";
-status.textContent="❌ Erreur de chargement audio.";
-toast("❌ Impossible de charger la musique.");
-}
+ const t=tracks.find(x=>x.id===id);if(!t){toast("❌ Musique introuvable.");return}
+ const player=$("mainPlayer"),status=$("playerStatus");status.textContent="⏳ Chargement de "+t.title+"…";
+ try{
+  const blob=await getTrackBlob(t);if(!blob)throw new Error("Fichier audio introuvable");
+  if(currentURL)URL.revokeObjectURL(currentURL);currentURL=URL.createObjectURL(blob);
+  $("playerTitle").textContent=t.title;$("playerArtist").textContent=t.artist;player.pause();player.removeAttribute("src");player.load();player.src=currentURL;player.load();
+  player.onloadedmetadata=()=>{status.className="status ok";status.textContent="✅ Audio chargé — "+Math.round(player.duration||0)+" seconde(s)."};
+  player.onerror=()=>{status.className="status bad";status.textContent="❌ Le navigateur ne peut pas lire ce format audio."};
+  try{await player.play();status.className="status ok";status.textContent="▶️ Lecture en cours."}catch{status.className="status ok";status.textContent="✅ Audio chargé. Appuie sur ▶️ dans la barre du lecteur."}
+ }catch(e){console.error(e);status.className="status bad";status.textContent="❌ "+e.message;toast("❌ Impossible de charger la musique.")}
 }
 
 function selectAudio(file){
-if(!file)return;
-const ok=file.type.startsWith("audio/")||/\.(mp3|wav|ogg|m4a|aac|flac|webm)$/i.test(file.name);
-if(!ok){toast("❌ Ce fichier n'est pas reconnu comme audio.");return}
-
-selectedAudio=file;
-$("fileName").textContent="🎵 "+file.name;
-$("audioStatus").className="status ok";
-$("audioStatus").textContent="✅ Fichier sélectionné : "+file.name;
-
-const preview=$("previewAudio");
-preview.pause();
-preview.removeAttribute("src");
-preview.src=URL.createObjectURL(file);
-preview.load();
-$("preview").style.display="block";
+ if(!file)return;const ok=file.type.startsWith("audio/")||/\.(mp3|wav|ogg|m4a|aac|flac|webm)$/i.test(file.name);
+ if(!ok){toast("❌ Ce fichier n'est pas reconnu comme audio.");return}
+ selectedAudio=file;$("fileName").textContent="🎵 "+file.name;$("audioStatus").className="status ok";$("audioStatus").textContent="✅ Fichier sélectionné : "+file.name;
+ const preview=$("previewAudio");preview.pause();preview.src=URL.createObjectURL(file);preview.load();$("preview").style.display="block";
 }
 
 async function publishMusic(){
-if(!currentUser?.creator)return;
-const title=$("musicTitle").value.trim();
-const artist=$("musicArtist").value.trim()||"Routier 87";
-const target=$("musicTarget").value;
-const cover=$("coverFile").files[0];
-const btn=$("publishBtn");
-if(cover && !cover.type.startsWith("image/")){toast("❌ La pochette doit être une image.");return}
-
-if(!title){toast("❌ Écris le titre de la musique.");return}
-if(!selectedAudio){toast("❌ Sélectionne ou glisse une musique.");return}
-
-btn.disabled=true;btn.textContent="⏳ PUBLICATION…";
-
-try{
-const id="track_"+Date.now()+"_"+Math.random().toString(36).slice(2);
-const audioId=id+"_audio";
-const coverId=cover?id+"_cover":null;
-
-/* Mise en mémoire AVANT toute autre étape :
-   le bouton Play pourra fonctionner immédiatement. */
-memoryBlobs.set(audioId,selectedAudio);
-await storeBlob(audioId,selectedAudio);
-
-if(cover)await storeBlob(coverId,cover);
-
-tracks.push({
-id,title,artist,target,audioId,coverId,
-filename:selectedAudio.name,
-mimeType:selectedAudio.type||"audio/mpeg",
-downloads:0,
-createdAt:Date.now()
-});
-
-saveData();
-addActivity("Routier 87","🎵 a publié",title+" → "+dest(target));
-
-selectedAudio=null;
-$("audioFile").value="";$("coverFile").value="";
-$("musicTitle").value="";$("musicArtist").value="Routier 87";
-$("fileName").textContent="";
-$("audioStatus").className="status";$("audioStatus").textContent="Aucun fichier audio sélectionné.";
-$("preview").style.display="none";
-$("previewAudio").pause();$("previewAudio").removeAttribute("src");$("previewAudio").load();
-
-await render();updateStats();
-toast("✅ « "+title+" » a été publié sur "+dest(target)+".");
-
-}catch(e){
-console.error("Publication:",e);
-toast("❌ Erreur pendant la publication : "+e.message);
-}finally{
-btn.disabled=false;btn.textContent="🚀 PUBLIER LA MUSIQUE";
-}
+ if(!currentUser?.creator)return;
+ const title=$("musicTitle").value.trim(),artist=$("musicArtist").value.trim()||"Routier 87",target=$("musicTarget").value,cover=$("coverFile").files[0],btn=$("publishBtn");
+ if(cover&&!cover.type.startsWith("image/"))return toast("❌ La pochette doit être une image.");
+ if(!title)return toast("❌ Écris le titre de la musique.");
+ if(!selectedAudio)return toast("❌ Sélectionne ou glisse une musique.");
+ btn.disabled=true;btn.textContent="⏳ PUBLICATION…";
+ try{
+  const id="track_"+Date.now()+"_"+Math.random().toString(36).slice(2),audioPath=id+"/"+selectedAudio.name.replace(/[^\w.\-() ]/g,"_"),coverPath=cover?id+"/"+Date.now()+"_"+cover.name.replace(/[^\w.\-() ]/g,"_"):null;
+  if(cloudEnabled){await cloudUpload("audio",audioPath,selectedAudio);if(cover)await cloudUpload("covers",coverPath,cover)}
+  else{await storeBlob(audioPath,selectedAudio);if(cover)await storeBlob(coverPath,cover)}
+  const t={id,title,artist,target,audioId:audioPath,coverId:coverPath,filename:selectedAudio.name,mimeType:selectedAudio.type||"audio/mpeg",downloads:0,createdAt:Date.now()};
+  tracks.unshift(t);saveLocal();if(cloudEnabled)await cloudInsertTrack(t);
+  await addActivity("Routier 87","🎵 a publié",title+" → "+dest(target));
+  selectedAudio=null;$("audioFile").value="";$("coverFile").value="";$("musicTitle").value="";$("musicArtist").value="Routier 87";$("fileName").textContent="";$("audioStatus").className="status";$("audioStatus").textContent="Aucun fichier audio sélectionné.";$("preview").style.display="none";$("previewAudio").pause();$("previewAudio").removeAttribute("src");$("previewAudio").load();
+  await render();updateStats();toast("✅ « "+title+" » a été publié sur "+dest(target)+".");
+ }catch(e){console.error(e);toast("❌ Erreur pendant la publication : "+e.message)}finally{btn.disabled=false;btn.textContent="🚀 PUBLIER LA MUSIQUE"}
 }
 
-function react(id,type){
-reactions[id]??={};
-if(reactions[id][currentUser.id]===type)delete reactions[id][currentUser.id];
-else reactions[id][currentUser.id]=type;
-saveData();
-const t=tracks.find(x=>x.id===id);
-addActivity(currentUser.display,type==="like"?"👍 a aimé":"👎 n'a pas aimé",t.title);
-render();updateStats();
+async function react(id,type){
+ reactions[id]??={};const old=reactions[id][currentUser.id];
+ if(old===type){delete reactions[id][currentUser.id]}else reactions[id][currentUser.id]=type;
+ saveLocal();
+ try{await cloudSaveReaction(id,old===type?null:type);await addActivity(currentUser.display,type==="like"?"👍 a aimé":"👎 n'a pas aimé",tracks.find(x=>x.id===id).title)}catch(e){toast("⚠️ Réaction locale enregistrée, cloud indisponible.");console.warn(e)}
+ render();updateStats();
 }
 
-function openComments(id){
-currentTrackId=id;
-$("modalTitle").textContent="💬 "+tracks.find(t=>t.id===id).title;
-renderComments();$("modalBack").style.display="grid";
-}
-function renderComments(){
-const a=comments[currentTrackId]||[];
-$("commentList").innerHTML=a.length?a.map(c=>`<div class="comment"><b>${esc(c.user)}</b><div>${esc(c.text)}</div></div>`).join(""):"<p>Aucun commentaire.</p>";
-}
-function sendComment(){
-const text=$("commentText").value.trim();if(!text)return;
-comments[currentTrackId]??=[];
-comments[currentTrackId].push({user:currentUser.display,text});
-saveData();
-const t=tracks.find(x=>x.id===currentTrackId);
-addActivity(currentUser.display,"💬 a commenté",t.title+" : "+text);
-$("commentText").value="";renderComments();updateStats();
+function openComments(id){currentTrackId=id;$("modalTitle").textContent="💬 "+tracks.find(t=>t.id===id).title;renderComments();$("modalBack").style.display="grid"}
+function renderComments(){const a=comments[currentTrackId]||[];$("commentList").innerHTML=a.length?a.map(c=>`<div class="comment"><b>${esc(c.user)}</b><div>${esc(c.text)}</div></div>`).join(""):"<p>Aucun commentaire.</p>"}
+async function sendComment(){
+ const text=$("commentText").value.trim();if(!text)return;
+ const c={user:currentUser.display,user_id:currentUser.id,text};comments[currentTrackId]??=[];comments[currentTrackId].push(c);saveLocal();
+ try{await cloudSaveComment(currentTrackId,c);await addActivity(currentUser.display,"💬 a commenté",tracks.find(x=>x.id===currentTrackId).title+" : "+text)}catch(e){toast("⚠️ Commentaire local conservé, cloud indisponible.")}
+ $("commentText").value="";renderComments();updateStats();
 }
 
 async function downloadTrack(id){
-const t=tracks.find(x=>x.id===id),blob=await readBlob(t.audioId);
-if(!blob){toast("❌ Audio introuvable.");return}
-t.downloads=(t.downloads||0)+1;saveData();
-const url=URL.createObjectURL(blob),a=document.createElement("a");
-a.href=url;a.download=t.filename||t.title;document.body.appendChild(a);a.click();a.remove();
-setTimeout(()=>URL.revokeObjectURL(url),2000);
-addActivity(currentUser.display,"⬇️ a téléchargé",t.title);updateStats();
+ const t=tracks.find(x=>x.id===id);try{const blob=await getTrackBlob(t);if(!blob)throw new Error("Audio introuvable");t.downloads=(t.downloads||0)+1;saveLocal();
+  if(cloudEnabled){const {error}=await sb.from("tracks").update({downloads:t.downloads,updated_at:new Date().toISOString()}).eq("id",t.id);if(error)throw error}
+  const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=t.filename||t.title;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);await addActivity(currentUser.display,"⬇️ a téléchargé",t.title);updateStats();
+ }catch(e){toast("❌ "+e.message)}
 }
 
 function openEdit(id){
-  const t=tracks.find(x=>x.id===id);
-  if(!t)return;
-  $("editId").value=id;
-  $("editTitle").value=t.title||"";
-  $("editArtist").value=t.artist||"";
-  $("editCover").value="";
-  $("editAudio").value="";
-  $("editStatus").className="status";
-  $("editStatus").textContent="Aucune modification enregistrée.";
-  $("editBack").style.display="grid";
+ const t=tracks.find(x=>x.id===id);if(!t)return;$("editId").value=id;$("editTitle").value=t.title||"";$("editArtist").value=t.artist||"";$("editCover").value="";$("editAudio").value="";$("editStatus").className="status";$("editStatus").textContent="Aucune modification enregistrée.";$("editBack").style.display="grid";
 }
-
 async function saveEdit(){
-  const id=$("editId").value;
-  const t=tracks.find(x=>x.id===id);
-  if(!t)return;
-
-  const title=$("editTitle").value.trim();
-  const artist=$("editArtist").value.trim()||"Routier 87";
-  const newCover=$("editCover").files[0];
-  const newAudio=$("editAudio").files[0];
-
-  if(!title){
-    $("editStatus").className="status bad";
-    $("editStatus").textContent="❌ Le titre est obligatoire.";
-    return;
-  }
-  if(newCover && !newCover.type.startsWith("image/")){
-    $("editStatus").className="status bad";
-    $("editStatus").textContent="❌ La pochette doit être une image.";
-    return;
-  }
-  if(newAudio){
-    const ok=newAudio.type.startsWith("audio/")||/\.(mp3|wav|ogg|m4a|aac|flac|webm)$/i.test(newAudio.name);
-    if(!ok){
-      $("editStatus").className="status bad";
-      $("editStatus").textContent="❌ Le fichier choisi n'est pas reconnu comme audio.";
-      return;
-    }
-  }
-
-  const oldTitle=t.title;
-  $("saveEdit").disabled=true;
-  $("saveEdit").textContent="⏳ ENREGISTREMENT…";
-
-  try{
-    t.title=title;
-    t.artist=artist;
-
-    // Chaque remplacement crée un nouvel identifiant de fichier :
-    // l'ancienne pochette/audio reste indépendant des autres musiques.
-    if(newCover){
-      const newCoverId=t.id+"_cover_"+Date.now();
-      await storeBlob(newCoverId,newCover);
-      const oldCoverId=t.coverId;
-      t.coverId=newCoverId;
-      if(oldCoverId)await removeBlob(oldCoverId);
-    }
-
-    if(newAudio){
-      const newAudioId=t.id+"_audio_"+Date.now();
-      await storeBlob(newAudioId,newAudio);
-      const oldAudioId=t.audioId;
-      t.audioId=newAudioId;
-      t.filename=newAudio.name;
-      t.mimeType=newAudio.type||t.mimeType||"audio/mpeg";
-      if(oldAudioId)await removeBlob(oldAudioId);
-    }
-
-    saveData();
-    addActivity("Routier 87","✏️ a modifié",oldTitle+" → "+title);
-    $("editStatus").className="status ok";
-    $("editStatus").textContent="✅ Modifications enregistrées.";
-    await render();
-    updateStats();
-
-    setTimeout(()=>{$("editBack").style.display="none"},500);
-    toast("✅ « "+title+" » a été modifiée.");
-  }catch(e){
-    console.error(e);
-    $("editStatus").className="status bad";
-    $("editStatus").textContent="❌ Erreur : "+e.message;
-  }finally{
-    $("saveEdit").disabled=false;
-    $("saveEdit").textContent="💾 ENREGISTRER LES MODIFICATIONS";
-  }
+ const id=$("editId").value,t=tracks.find(x=>x.id===id);if(!t)return;
+ const title=$("editTitle").value.trim(),artist=$("editArtist").value.trim()||"Routier 87",newCover=$("editCover").files[0],newAudio=$("editAudio").files[0];
+ if(!title)return $("editStatus").textContent="❌ Le titre est obligatoire.";
+ if(newCover&&!newCover.type.startsWith("image/"))return $("editStatus").textContent="❌ La pochette doit être une image.";
+ if(newAudio&&!(newAudio.type.startsWith("audio/")||/\.(mp3|wav|ogg|m4a|aac|flac|webm)$/i.test(newAudio.name)))return $("editStatus").textContent="❌ Audio non reconnu.";
+ const oldTitle=t.title;$("saveEdit").disabled=true;$("saveEdit").textContent="⏳ ENREGISTREMENT…";
+ try{
+  t.title=title;t.artist=artist;
+  if(newCover){const path=t.id+"/cover_"+Date.now()+"_"+newCover.name.replace(/[^\w.\-() ]/g,"_");if(cloudEnabled)await cloudUpload("covers",path,newCover);else await storeBlob(path,newCover);const old=t.coverId;t.coverId=path;if(old&&!cloudEnabled)await removeBlob(old)}
+  if(newAudio){const path=t.id+"/audio_"+Date.now()+"_"+newAudio.name.replace(/[^\w.\-() ]/g,"_");if(cloudEnabled)await cloudUpload("audio",path,newAudio);else await storeBlob(path,newAudio);const old=t.audioId;t.audioId=path;t.filename=newAudio.name;t.mimeType=newAudio.type||"audio/mpeg";if(old&&!cloudEnabled)await removeBlob(old)}
+  saveLocal();
+  if(cloudEnabled){const {error}=await sb.from("tracks").update({title:t.title,artist:t.artist,audio_path:t.audioId,cover_path:t.coverId,filename:t.filename,mime_type:t.mimeType,updated_at:new Date().toISOString()}).eq("id",t.id);if(error)throw error}
+  await addActivity("Routier 87","✏️ a modifié",oldTitle+" → "+title);$("editStatus").className="status ok";$("editStatus").textContent="✅ Modifications enregistrées.";await render();updateStats();setTimeout(()=>$("editBack").style.display="none",500);toast("✅ « "+title+" » a été modifiée.");
+ }catch(e){$("editStatus").className="status bad";$("editStatus").textContent="❌ "+e.message}finally{$("saveEdit").disabled=false;$("saveEdit").textContent="💾 ENREGISTRER LES MODIFICATIONS"}
 }
 
 async function deleteTrack(id){
-const t=tracks.find(x=>x.id===id);if(!t)return;
-if(!confirm("Supprimer définitivement « "+t.title+" » ?\n\nLa musique, son audio et sa pochette seront supprimés."))return;
-await removeBlob(t.audioId);if(t.coverId)await removeBlob(t.coverId);
-tracks=tracks.filter(x=>x.id!==id);delete reactions[id];delete comments[id];saveData();
-render();updateStats();toast("🗑️ Musique supprimée.");
+ const t=tracks.find(x=>x.id===id);if(!t)return;if(!confirm("Supprimer définitivement « "+t.title+" » ?"))return;
+ try{
+  if(cloudEnabled){const {error}=await sb.from("tracks").delete().eq("id",id);if(error)throw error;try{await sb.storage.from("audio").remove([t.audioId])}catch{}if(t.coverId)try{await sb.storage.from("covers").remove([t.coverId])}catch{}}
+  else{await removeBlob(t.audioId);if(t.coverId)await removeBlob(t.coverId)}
+  tracks=tracks.filter(x=>x.id!==id);delete reactions[id];delete comments[id];saveLocal();await addActivity("Routier 87","🗑️ a supprimé",t.title);await render();updateStats();toast("🗑️ Musique supprimée.");
+ }catch(e){toast("❌ Suppression cloud impossible : "+e.message)}
 }
 
-function addActivity(user,action,text){
-activity.unshift({user,action,text,date:new Date().toLocaleString("fr-FR")});
-activity=activity.slice(0,100);saveData();renderActivity();
-}
-function renderActivity(){
-$("activity").innerHTML=activity.length?activity.slice(0,50).map(a=>`<div class="event"><b>${esc(a.user)}</b><div>${esc(a.action)} : ${esc(a.text)}</div><small>${esc(a.date)}</small></div>`).join(""):"<p>Aucune activité.</p>";
-}
+function renderActivity(){$("activity").innerHTML=activity.length?activity.slice(0,50).map(a=>`<div class="event"><b>${esc(a.user)}</b><div>${esc(a.action)} : ${esc(a.text)}</div><small>${esc(a.date)}</small></div>`).join(""):"<p>Aucune activité.</p>"}
 function updateStats(){
-if(!currentUser?.creator)return;
-let likes=0,dislikes=0,commentsN=0,downloads=0;
-Object.values(reactions).forEach(r=>Object.values(r).forEach(v=>v==="like"?likes++:v==="dislike"?dislikes++:0));
-Object.values(comments).forEach(a=>commentsN+=a.length);
-tracks.forEach(t=>downloads+=Number(t.downloads||0));
-$("sTracks").textContent=tracks.length;$("sProfiles").textContent=Object.keys(USERS).length;
-$("sLikes").textContent=likes;$("sDislikes").textContent=dislikes;$("sComments").textContent=commentsN;$("sDownloads").textContent=downloads;
+ if(!currentUser?.creator)return;let likes=0,dislikes=0,commentsN=0,downloads=0;Object.values(reactions).forEach(r=>Object.values(r).forEach(v=>v==="like"?likes++:v==="dislike"?dislikes++:0));Object.values(comments).forEach(a=>commentsN+=a.length);tracks.forEach(t=>downloads+=Number(t.downloads||0));
+ $("sTracks").textContent=tracks.length;$("sProfiles").textContent=Object.keys(profiles).length;$("sLikes").textContent=likes;$("sDislikes").textContent=dislikes;$("sComments").textContent=commentsN;$("sDownloads").textContent=downloads;
 }
 
-/* événements */
-$("loginBtn").onclick=login;
-$("loginPw").onkeydown=e=>{if(e.key==="Enter")login()};
-$("logout").onclick=()=>{sessionStorage.removeItem("r87_current_user_v4");location.reload()};
-$("studioBtn").onclick=()=>$("creator").scrollIntoView({behavior:"smooth"});
-$("search").oninput=render;
-$("publishBtn").onclick=publishMusic;
-$("closeModal").onclick=()=>$("modalBack").style.display="none";
-$("closeEdit").onclick=()=>$("editBack").style.display="none";
-$("saveEdit").onclick=saveEdit;
-$("sendComment").onclick=sendComment;
-$("commentText").onkeydown=e=>{if(e.key==="Enter")sendComment()};
+function exportBackup(){
+ const payload={version:8,exportedAt:new Date().toISOString(),tracks,reactions,comments,activity,profiles};
+ const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="Routier87_V8_backup_"+new Date().toISOString().slice(0,10)+".json";a.click();URL.revokeObjectURL(url);toast("📦 Sauvegarde JSON exportée.");
+}
+function importBackup(file){
+ const r=new FileReader();r.onload=async()=>{try{const x=JSON.parse(r.result);if(!x||!Array.isArray(x.tracks))throw new Error("Sauvegarde invalide");tracks=x.tracks;reactions=x.reactions||{};comments=x.comments||{};activity=x.activity||[];profiles={...profiles,...(x.profiles||{})};saveLocal();await render();updateStats();renderActivity();toast("✅ Données restaurées localement. Pour le cloud, publie/synchronise les éléments depuis le Studio.")}catch(e){toast("❌ "+e.message)}};r.readAsText(file)}
+function showCloudSetup(){const c=cloudConfig();$("supabaseUrl").value=c?.url||"";$("supabaseKey").value=c?.key||"";$("cloudSetup").classList.toggle("hidden")}
+async function connectCloud(){
+ const url=$("supabaseUrl").value.trim(),key=$("supabaseKey").value.trim();if(!url||!key)return toast("❌ URL et clé Supabase obligatoires.");
+ localStorage.setItem(CLOUD_KEY,JSON.stringify({url,key}));$("cloudStatus").textContent="⏳ Connexion…";const ok=await initCloud();$("cloudStatus").textContent=ok?"✅ Cloud connecté et synchronisation active.":"❌ Échec de connexion.";
+}
+function disableCloud(){localStorage.removeItem(CLOUD_KEY);if(realtimeChannel&&sb)sb.removeChannel(realtimeChannel);cloudEnabled=false;setSync("LOCAL",false);$("cloudStatus").textContent="Mode local activé.";toast("Mode local activé.")}
 
-const drop=$("drop"),audioFile=$("audioFile");
-drop.onclick=()=>audioFile.click();
-audioFile.onchange=e=>selectAudio(e.target.files[0]);
-drop.addEventListener("dragover",e=>{e.preventDefault();drop.style.background="#7c5cff22"});
-drop.addEventListener("dragleave",()=>drop.style.background="");
-drop.addEventListener("drop",e=>{e.preventDefault();drop.style.background="";selectAudio(e.dataTransfer.files[0])});
-$("modalBack").onclick=e=>{if(e.target.id==="modalBack")$("modalBack").style.display="none"};
-$("editBack").onclick=e=>{if(e.target.id==="editBack")$("editBack").style.display="none"};
+$("loginBtn").onclick=login;$("loginPw").onkeydown=e=>{if(e.key==="Enter")login()};
+$("logout").onclick=()=>{sessionStorage.removeItem("r87_current_user_v8");location.reload()};
+$("studioBtn").onclick=()=>$("creator").scrollIntoView({behavior:"smooth"});$("search").oninput=render;$("publishBtn").onclick=publishMusic;
+$("closeModal").onclick=()=>$("modalBack").style.display="none";$("closeEdit").onclick=()=>$("editBack").style.display="none";$("saveEdit").onclick=saveEdit;$("sendComment").onclick=sendComment;$("commentText").onkeydown=e=>{if(e.key==="Enter")sendComment()};
+$("saveProfile").onclick=async()=>{try{await syncProfile()}catch(e){toast("❌ "+e.message)}};
+$("exportBtn").onclick=exportBackup;$("importBtn").onclick=()=>{const i=document.createElement("input");i.type="file";i.accept=".json,application/json";i.onchange=()=>i.files[0]&&importBackup(i.files[0]);i.click()};
+$("saveCloud").onclick=connectCloud;$("disableCloud").onclick=disableCloud;
+$("syncBadge").onclick=showCloudSetup;
 
-$("mainPlayer").addEventListener("error",()=>{
-$("playerStatus").className="status bad";
-$("playerStatus").textContent="❌ Ce navigateur ne peut pas décoder ce fichier audio.";
-});
+const drop=$("drop"),audioFile=$("audioFile");drop.onclick=()=>audioFile.click();audioFile.onchange=e=>selectAudio(e.target.files[0]);
+drop.addEventListener("dragover",e=>{e.preventDefault();drop.style.background="#7c5cff22"});drop.addEventListener("dragleave",()=>drop.style.background="");drop.addEventListener("drop",e=>{e.preventDefault();drop.style.background="";selectAudio(e.dataTransfer.files[0])});
+$("modalBack").onclick=e=>{if(e.target.id==="modalBack")$("modalBack").style.display="none"};$("editBack").onclick=e=>{if(e.target.id==="editBack")$("editBack").style.display="none"};
+$("mainPlayer").addEventListener("error",()=>{$("playerStatus").className="status bad";$("playerStatus").textContent="❌ Ce navigateur ne peut pas décoder ce fichier audio."});
 
 (async function init(){
-loadData();
-try{await openDB()}catch(e){console.warn("IndexedDB indisponible",e)}
-const saved=sessionStorage.getItem("r87_current_user_v4");
-if(saved){currentUser=JSON.parse(saved);showApp()}
+ loadLocal();try{await openDB()}catch(e){console.warn("IndexedDB indisponible",e)}
+ const cfg=cloudConfig();if(cfg){await initCloud()}else{setSync("LOCAL",false)}
+ const saved=sessionStorage.getItem("r87_current_user_v8")||sessionStorage.getItem("r87_current_user_v4");
+ if(saved){currentUser=JSON.parse(saved);if(!currentUser.display)currentUser.display=profiles[currentUser.id]?.display_name||USERS[currentUser.id]?.display;showApp()}
 })();
 </script>
 </body>
