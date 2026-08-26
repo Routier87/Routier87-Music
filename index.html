@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Routier 87 Music Hub — V6</title>
+<title>Routier 87 Music Hub — V7</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 5%,#342060,transparent 35%),radial-gradient(circle at 90% 15%,#06435d,transparent 32%),#06070d;color:#fff;font-family:Arial,sans-serif}button,input,select{font:inherit}button{cursor:pointer}.hidden{display:none!important}
 .login{min-height:100vh;display:grid;place-items:center;padding:20px}.box,.panel,.card{background:#0d1119;border:1px solid #2a3040;border-radius:18px}.box{width:min(460px,100%);padding:35px;box-shadow:0 30px 100px #000}.logo,.mini{display:grid;place-items:center;background:linear-gradient(135deg,#7c5cff,#31a9ff);font-weight:900}.logo{width:68px;height:68px;border-radius:18px}.k{color:#b0a2ff;font-size:10px;font-weight:900;letter-spacing:3px;margin-top:18px}h1{font-size:44px;margin:8px 0}p{color:#99a1b3;line-height:1.5}label{display:block;font-size:10px;font-weight:900;margin:15px 0 7px}input,select{width:100%;padding:13px;background:#080b12;color:#fff;border:1px solid #2a3040;border-radius:10px}.primary,.publish{width:100%;margin-top:18px;padding:14px;border:0;border-radius:11px;background:linear-gradient(135deg,#7c5cff,#31a9ff);color:#fff;font-weight:900}.error{color:#ff607f;font-size:12px;min-height:18px}
@@ -357,7 +357,7 @@ function react(id,type){
 reactions[id]??={};
 if(reactions[id][currentUser.id]===type)delete reactions[id][currentUser.id];
 else reactions[id][currentUser.id]=type;
-save();
+saveData();
 const t=tracks.find(x=>x.id===id);
 addActivity(currentUser.display,type==="like"?"👍 a aimé":"👎 n'a pas aimé",t.title);
 render();updateStats();
@@ -376,7 +376,7 @@ function sendComment(){
 const text=$("commentText").value.trim();if(!text)return;
 comments[currentTrackId]??=[];
 comments[currentTrackId].push({user:currentUser.display,text});
-save();
+saveData();
 const t=tracks.find(x=>x.id===currentTrackId);
 addActivity(currentUser.display,"💬 a commenté",t.title+" : "+text);
 $("commentText").value="";renderComments();updateStats();
@@ -385,7 +385,7 @@ $("commentText").value="";renderComments();updateStats();
 async function downloadTrack(id){
 const t=tracks.find(x=>x.id===id),blob=await readBlob(t.audioId);
 if(!blob){toast("❌ Audio introuvable.");return}
-t.downloads=(t.downloads||0)+1;save();
+t.downloads=(t.downloads||0)+1;saveData();
 const url=URL.createObjectURL(blob),a=document.createElement("a");
 a.href=url;a.download=t.filename||t.title;document.body.appendChild(a);a.click();a.remove();
 setTimeout(()=>URL.revokeObjectURL(url),2000);
@@ -485,13 +485,13 @@ async function deleteTrack(id){
 const t=tracks.find(x=>x.id===id);if(!t)return;
 if(!confirm("Supprimer définitivement « "+t.title+" » ?\n\nLa musique, son audio et sa pochette seront supprimés."))return;
 await removeBlob(t.audioId);if(t.coverId)await removeBlob(t.coverId);
-tracks=tracks.filter(x=>x.id!==id);delete reactions[id];delete comments[id];save();
+tracks=tracks.filter(x=>x.id!==id);delete reactions[id];delete comments[id];saveData();
 render();updateStats();toast("🗑️ Musique supprimée.");
 }
 
 function addActivity(user,action,text){
 activity.unshift({user,action,text,date:new Date().toLocaleString("fr-FR")});
-activity=activity.slice(0,100);save();renderActivity();
+activity=activity.slice(0,100);saveData();renderActivity();
 }
 function renderActivity(){
 $("activity").innerHTML=activity.length?activity.slice(0,50).map(a=>`<div class="event"><b>${esc(a.user)}</b><div>${esc(a.action)} : ${esc(a.text)}</div><small>${esc(a.date)}</small></div>`).join(""):"<p>Aucune activité.</p>";
