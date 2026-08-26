@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Routier 87 Music Hub — V9 Full Sync</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 5%,#342060,transparent 35%),radial-gradient(circle at 90% 15%,#06435d,transparent 32%),#06070d;color:#fff;font-family:Arial,sans-serif}button,input,select{font:inherit}button{cursor:pointer}.hidden{display:none!important}
+.login{min-height:100vh;display:grid;place-items:center;padding:20px}.box,.panel,.card{background:#0d1119;border:1px solid #2a3040;border-radius:18px}.box{width:min(460px,100%);padding:35px;box-shadow:0 30px 100px #000}.logo,.mini{display:grid;place-items:center;background:linear-gradient(135deg,#7c5cff,#31a9ff);font-weight:900}.logo{width:68px;height:68px;border-radius:18px}.k{color:#b0a2ff;font-size:10px;font-weight:900;letter-spacing:3px;margin-top:18px}h1{font-size:44px;margin:8px 0}p{color:#99a1b3;line-height:1.5}label{display:block;font-size:10px;font-weight:900;margin:15px 0 7px}input,select{width:100%;padding:13px;background:#080b12;color:#fff;border:1px solid #2a3040;border-radius:10px}.primary,.publish{width:100%;margin-top:18px;padding:14px;border:0;border-radius:11px;background:linear-gradient(135deg,#7c5cff,#31a9ff);color:#fff;font-weight:900}.error{color:#ff607f;font-size:12px;min-height:18px}
+header{height:72px;position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:0 5%;background:#070910ee;border-bottom:1px solid #2a3040;backdrop-filter:blur(15px)}.brand{display:flex;align-items:center;gap:10px}.mini{width:40px;height:40px;border-radius:11px}.brand small{display:block;color:#99a1b3;font-size:8px;letter-spacing:2px}.btn,.act{padding:10px;border-radius:9px;border:1px solid #2a3040;background:#ffffff08;color:#fff}
+main{width:90%;max-width:1450px;margin:auto;padding:30px 0 150px}.hero{min-height:290px;padding:45px;display:flex;align-items:end;border:1px solid #2a3040;border-radius:27px;background:linear-gradient(100deg,#080a12ef,#15102bd0),url("https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=2200&q=90") center/cover}.hero h2{font-size:clamp(42px,6vw,75px);margin:8px 0}.search{max-width:320px}.head{display:flex;justify-content:space-between;align-items:end;margin:40px 0 18px}.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:15px}.card{padding:10px;transition:.2s}.card:hover{transform:translateY(-4px);border-color:#7c5cff88}.cover{aspect-ratio:1;border-radius:13px;overflow:hidden;position:relative;background:linear-gradient(135deg,#7c5cff,#31a9ff);display:grid;place-items:center}.cover img{width:100%;height:100%;object-fit:cover}.sym{font-size:50px}.play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:58px;height:58px;border:0;border-radius:50%;background:#fff;color:#111}.title{font-weight:900;margin:11px 3px 3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.artist{color:#99a1b3;font-size:12px;margin:0 3px 8px}.badge{font-size:9px;color:#b9adff;background:#7c5cff18;padding:5px 7px;border-radius:7px}.actions{display:grid;grid-template-columns:1fr 40px 40px 40px;gap:5px;margin-top:8px}.download,.delete{width:100%;margin-top:6px}.delete{color:#ff8298}.empty{grid-column:1/-1;text-align:center;padding:55px;color:#99a1b3;border:1px dashed #2a3040;border-radius:17px}
+.creator{margin-top:60px}.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin:18px 0}.stat{padding:17px;background:#0d1119;border:1px solid #2a3040;border-radius:14px}.stat b{display:block;font-size:26px}.stat span{font-size:9px;color:#99a1b3}.creatorGrid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.panel{padding:23px}.drop{border:1px dashed #7c5cffaa;border-radius:15px;padding:30px;text-align:center;background:#7c5cff09;margin-bottom:15px}.drop strong,.drop small{display:block}.drop small{color:#99a1b3;margin-top:7px}.fileName{color:#b8abff;font-size:12px;font-weight:900;margin-top:8px}.preview{display:none;margin-bottom:12px}.preview audio,.player audio{width:100%}.formGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.full,.publish{grid-column:1/-1}.activity{max-height:450px;overflow:auto}.event{padding:12px 0;border-bottom:1px solid #2a3040}.event b{font-size:12px}.event div{font-size:12px}.event small{font-size:9px;color:#99a1b3}.player{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);z-index:30;width:min(1050px,calc(100% - 24px));padding:12px 15px;background:#080a10f5;border:1px solid #2a3040;border-radius:16px;box-shadow:0 20px 60px #000}.pt{font-size:13px;font-weight:900}.pa{font-size:10px;color:#99a1b3;margin:3px 0 7px}.toast{position:fixed;right:18px;bottom:105px;z-index:100;padding:13px 16px;background:#10131cf5;border:1px solid #2a3040;border-radius:10px;max-width:450px}.modalBack{position:fixed;inset:0;z-index:50;display:none;place-items:center;background:#000b;padding:20px}.modal{width:min(550px,100%);padding:23px;max-height:85vh;overflow:auto;background:#10131c;border:1px solid #2a3040;border-radius:18px}.modalHead{display:flex;justify-content:space-between}.comment{padding:12px 0;border-bottom:1px solid #2a3040}.comment b{font-size:12px}.comment div{font-size:13px;margin-top:4px}.commentForm{display:flex;gap:7px;margin-top:14px}.commentForm button{border:0;border-radius:9px;padding:0 15px;background:#7c5cff;color:#fff}
+.status{margin-top:10px;padding:10px;border-radius:9px;background:#080b12;border:1px solid #2a3040;font-size:11px;color:#99a1b3}.status.ok{color:#9dffbd}.status.bad{color:#ff8298}
+@media(max-width:1150px){.grid{grid-template-columns:repeat(4,1fr)}.stats{grid-template-columns:repeat(3,1fr)}}@media(max-width:900px){.grid{grid-template-columns:repeat(3,1fr)}.creatorGrid{grid-template-columns:1fr}}@media(max-width:650px){main{width:calc(100% - 24px)}.grid{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:repeat(2,1fr)}.formGrid{grid-template-columns:1fr}.full,.publish{grid-column:1}.hero{padding:28px}.head{display:block}.search{max-width:none;margin-top:10px}}
+
+.syncDot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#ff607f;margin-right:6px}
+@media(max-width:650px){.formGrid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<section id="loginPage" class="login">
+<div class="box"><div class="logo">R87</div><div class="k">PRIVATE MUSIC PLATFORM</div>
+<h1>Bienvenue.</h1><p>Connecte-toi à ton espace musical.</p>
+<label>IDENTIFIANT</label><input id="loginId">
+<label>MOT DE PASSE</label><input id="loginPw" type="password">
+<button id="loginBtn" class="primary">Se connecter →</button><div id="loginError" class="error"></div></div>
+</section>
+
+<div id="app" class="hidden">
+<header><div class="brand"><div class="mini">R87</div><div><b>Routier 87 Music Hub</b><small>PRIVATE MUSIC PLATFORM</small></div></div>
+<div><span id="who"></span>
+<button id="syncBtn" class="btn">☁️ Connexion</button>
+<button id="studioBtn" class="btn hidden">👑 Creator Studio</button>
+<button id="logout" class="btn">Déconnexion</button></div></header>
+<main>
+<section class="hero"><div><div class="k">ESPACE MUSICAL</div><h2 id="welcome"></h2><p>Écoute, commente, réagis et télécharge.</p></div></section>
+<div class="head"><div><h2>Ma bibliothèque</h2><p id="count"></p></div><input id="search" class="search" placeholder="🔎 Rechercher"></div>
+<div id="grid" class="grid"></div>
+
+<section id="creator" class="creator hidden">
+<h2>👑 Creator Studio — Routier 87</h2><p>Publication directe sur le profil sélectionné. Chaque musique possède sa <b>propre pochette indépendante</b>. Tu peux aussi <b>modifier ou supprimer</b> les sons déjà publiés.</p>
+<div class="stats"><div class="stat"><b id="sTracks">0</b><span>Musiques</span></div><div class="stat"><b id="sProfiles">0</b><span>Profils</span></div><div class="stat"><b id="sLikes">0</b><span>Likes</span></div><div class="stat"><b id="sDislikes">0</b><span>Dislikes</span></div><div class="stat"><b id="sComments">0</b><span>Commentaires</span></div><div class="stat"><b id="sDownloads">0</b><span>Téléchargements</span></div></div>
+<div class="creatorGrid">
+<div class="panel"><h3>🎵 Publier une musique</h3>
+<div id="drop" class="drop"><div style="font-size:40px">🎵</div><strong>Glisse ton fichier audio ici</strong><small>ou clique pour sélectionner</small><div id="fileName" class="fileName"></div><input id="audioFile" type="file" accept="audio/*,.mp3,.wav,.ogg,.m4a,.aac,.flac,.webm" hidden></div>
+<div id="preview" class="preview"><audio id="previewAudio" controls></audio></div>
+<div id="audioStatus" class="status">Aucun fichier audio sélectionné.</div>
+<div class="formGrid">
+<div class="full"><label>TITRE</label><input id="musicTitle"></div>
+<div><label>ARTISTE</label><input id="musicArtist" value="Routier 87"></div>
+<div><label>DESTINATAIRE</label><select id="musicTarget">
+<option value="Benjamin">Benjamin</option><option value="Samantha">Samantha</option><option value="Océane">Océane</option><option value="Chico">Chico</option><option value="Tristan">Tristan</option><option value="Manon">Manon</option><option value="Éric">Éric</option><option value="Mr_Wolf">Mr_Wolf</option><option value="F-O-T">Far Motors Transport</option><option value="Routier87">👑 Routier 87 — MON PROPRE PROFIL</option><option value="ALL">👥 TOUS LES PROFILS</option>
+</select></div>
+<div class="full"><label>POCHETTE</label><input id="coverFile" type="file" accept="image/*"></div>
+<button id="publishBtn" class="publish">🚀 PUBLIER LA MUSIQUE</button></div></div>
+<div class="panel"><h3>🔔 Activité</h3><div id="activity"></div></div>
+</div></section>
+</main>
+
+<div class="player"><div id="playerTitle" class="pt">Aucune musique</div><div id="playerArtist" class="pa">Routier 87 Music Hub</div>
+<audio id="mainPlayer" controls preload="auto"></audio><div id="playerStatus" class="status">Lecteur prêt.</div></div>
+</div>
+
+
+
+<div id="syncBack" class="modalBack">
+  <div class="modal">
+    <div class="modalHead"><h3>☁️ Synchronisation V9</h3><button id="closeSync" class="btn">✕</button></div>
+    <p>La V9 n'utilise ni Supabase ni Firebase. Le site GitHub Pages reste statique et se connecte à ton propre serveur WebSocket.</p>
+    <label>ADRESSE DU SERVEUR WEBSOCKET</label>
+    <input id="serverUrl" placeholder="wss://ton-serveur.example">
+    <div class="formGrid">
+      <button id="connectSync" class="publish">🔄 CONNECTER</button>
+      <button id="disconnectSync" class="btn">⛔ DÉCONNECTER</button>
+      <button id="exportData" class="btn">📦 EXPORTER</button>
+      <button id="importData" class="btn">♻️ RESTAURER</button>
+      <input id="importFile" type="file" accept="application/json" hidden>
+    </div>
+    <div id="syncStatus" class="status">Déconnecté — mode local.</div>
+    <p style="font-size:11px">Conseil : utilise HTTPS + WSS en production. Ne mets jamais un secret serveur dans ce HTML.</p>
+  </div>
+</div>
+
+<div id="editBack" class="modalBack">
+  <div class="modal">
+    <div class="modalHead">
+      <h3>✏️ Modifier la musique</h3>
+      <button id="closeEdit" class="btn">✕</button>
+    </div>
+    <p>Tu peux modifier le titre, l'artiste, la pochette et remplacer le fichier audio.</p>
+    <input id="editId" type="hidden">
+    <label>TITRE</label>
+    <input id="editTitle" placeholder="Titre de la musique">
+    <label>ARTISTE</label>
+    <input id="editArtist" placeholder="Artiste">
+    <label>NOUVELLE POCHETTE <small>(facultatif)</small></label>
+    <input id="editCover" type="file" accept="image/*">
+    <label>NOUVEAU FICHIER AUDIO <small>(facultatif)</small></label>
+    <input id="editAudio" type="file" accept="audio/*,.mp3,.wav,.ogg,.m4a,.aac,.flac,.webm">
+    <div id="editStatus" class="status">Aucune modification enregistrée.</div>
+    <button id="saveEdit" class="publish">💾 ENREGISTRER LES MODIFICATIONS</button>
+  </div>
+</div>
+
+<div id="modalBack" class="modalBack"><div class="modal"><div class="modalHead"><h3 id="modalTitle"></h3><button id="closeModal" class="btn">✕</button></div><div id="commentList"></div><div class="commentForm"><input id="commentText" maxlength="500" placeholder="Ton commentaire..."><button id="sendComment">Envoyer</button></div></div></div>
+
+
+<script>
+"use strict";
+
+/* =========================================================
+   ROUTIER 87 MUSIC HUB — V9 FULL SYNC
+   Frontend statique compatible GitHub Pages.
+   Synchronisation : WebSocket vers ton propre serveur.
+   Stockage local : IndexedDB + localStorage.
+   ========================================================= */
+
+const USERS={
+  Routier87:{password:"2001",display:"Routier 87",creator:true},
+  Benjamin:{password:"2026",display:"Benjamin"},
+  Samantha:{password:"2026",display:"Samantha"},
+  Océane:{password:"2026",display:"Océane"},
+  Chico:{password:"2026",display:"Chico"},
+  Tristan:{password:"2026",display:"Tristan"},
+  Manon:{password:"2026",display:"Manon"},
+  Éric:{password:"2026",display:"Éric"},
+  Mr_Wolf:{password:"2026",display:"Mr_Wolf"},
+  "F-O-T":{password:"2025",display:"Far Motors Transport"}
+};
+
+const KEY="r87_v9";
+const DB_NAME="Routier87MusicV9";
+const STORE="files";
+const DEFAULT_SERVER = localStorage.getItem(KEY+"_server") || "";
+let db=null,currentUser=null;
+let state={tracks:[],reactions:{},comments:{},activity:[],profiles:USERS};
+let selectedAudio=null,currentTrackId=null,currentURL=null;
+let ws=null, syncConnected=false, syncing=false;
+const memoryBlobs=new Map(), coverURLs=new Set();
+
+const $=id=>document.getElementById(id);
+const esc=v=>String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;");
+const dest=v=>v==="ALL"?"TOUS LES PROFILS":USERS[v]?.display||state.profiles?.[v]?.display||v;
+
+function toast(msg){
+  document.querySelector(".toast")?.remove();
+  const d=document.createElement("div"); d.className="toast"; d.textContent=msg;
+  document.body.appendChild(d); setTimeout(()=>d.remove(),4500);
+}
+function setSyncStatus(text,ok=false,bad=false){
+  const e=$("syncStatus"); if(!e)return;
+  e.className="status"+(ok?" ok":bad?" bad":""); e.textContent=text;
+  const b=$("syncBtn"); if(b)b.textContent=syncConnected?"☁️ En ligne":"☁️ Connexion";
+}
+
+function saveLocal(){
+  localStorage.setItem(KEY+"_state",JSON.stringify(state));
+}
+function loadLocal(){
+  try{
+    const x=JSON.parse(localStorage.getItem(KEY+"_state")||"null");
+    if(x&&typeof x==="object") state={...state,...x};
+  }catch(e){console.warn(e)}
+}
+
+function openDB(){
+  return new Promise((resolve,reject)=>{
+    try{
+      const r=indexedDB.open(DB_NAME,1);
+      r.onupgradeneeded=e=>{
+        const d=e.target.result;
+        if(!d.objectStoreNames.contains(STORE)) d.createObjectStore(STORE,{keyPath:"id"});
+      };
+      r.onsuccess=e=>{db=e.target.result;resolve()};
+      r.onerror=()=>reject(r.error);
+    }catch(e){reject(e)}
+  });
+}
+function storeBlob(id,blob){
+  memoryBlobs.set(id,blob);
+  if(!db)return Promise.resolve();
+  return new Promise(resolve=>{
+    try{
+      const tx=db.transaction(STORE,"readwrite");
+      tx.objectStore(STORE).put({id,blob});
+      tx.oncomplete=resolve; tx.onerror=resolve;
+    }catch(e){resolve()}
+  });
+}
+function readBlob(id){
+  if(memoryBlobs.has(id))return Promise.resolve(memoryBlobs.get(id));
+  if(!db)return Promise.resolve(null);
+  return new Promise(resolve=>{
+    try{
+      const r=db.transaction(STORE,"readonly").objectStore(STORE).get(id);
+      r.onsuccess=()=>{const b=r.result?.blob||null;if(b)memoryBlobs.set(id,b);resolve(b)};
+      r.onerror=()=>resolve(null);
+    }catch(e){resolve(null)}
+  });
+}
+function removeBlob(id){
+  memoryBlobs.delete(id);
+  if(!db)return Promise.resolve();
+  return new Promise(resolve=>{
+    try{
+      const tx=db.transaction(STORE,"readwrite");
+      tx.objectStore(STORE).delete(id); tx.oncomplete=resolve; tx.onerror=resolve;
+    }catch(e){resolve()}
+  });
+}
+
+/* ---------- WebSocket synchronization ---------- */
+
+function normalizeServerUrl(v){
+  v=(v||"").trim();
+  if(!v)return "";
+  if(v.startsWith("https://"))return "wss://"+v.slice(8);
+  if(v.startsWith("http://"))return "ws://"+v.slice(7);
+  if(v.startsWith("ws://")||v.startsWith("wss://"))return v;
+  return "wss://"+v;
+}
+
+function connectSync(){
+  const raw=$("serverUrl").value.trim()||DEFAULT_SERVER;
+  const url=normalizeServerUrl(raw);
+  if(!url){toast("❌ Renseigne l'adresse du serveur WebSocket.");return}
+  localStorage.setItem(KEY+"_server",url);
+  if(ws){try{ws.close()}catch(e){}}
+  setSyncStatus("⏳ Connexion au serveur…");
+  try{ws=new WebSocket(url)}catch(e){setSyncStatus("❌ Adresse invalide.",false,true);return}
+
+  ws.onopen=()=>{
+    syncConnected=true; syncing=true;
+    setSyncStatus("☁️ Connecté — synchronisation en cours…",true);
+    ws.send(JSON.stringify({type:"hello",user:currentUser.id}));
+  };
+  ws.onmessage=async e=>{
+    try{
+      const msg=JSON.parse(e.data);
+      if(msg.type==="state"){
+        state={...state,...msg.state};
+        saveLocal(); await render(); updateStats(); renderActivity();
+        setSyncStatus("☁️ Synchronisé en direct",true);
+      }else if(msg.type==="patch"){
+        applyPatch(msg.patch);
+        saveLocal(); await render(); updateStats(); renderActivity();
+      }else if(msg.type==="ack"){
+        setSyncStatus("☁️ Synchronisé en direct",true);
+      }else if(msg.type==="error"){
+        toast("❌ "+msg.message);
+      }
+    }catch(err){console.warn("WS message",err)}
+  };
+  ws.onerror=()=>{
+    syncConnected=false; syncing=false;
+    setSyncStatus("❌ Serveur inaccessible — mode local.",false,true);
+  };
+  ws.onclose=()=>{
+    syncConnected=false; syncing=false;
+    setSyncStatus("LOCAL — connexion fermée.");
+  };
+}
+
+function disconnectSync(){
+  if(ws){try{ws.close()}catch(e){}}
+  ws=null;syncConnected=false;syncing=false;setSyncStatus("LOCAL — mode local.");
+}
+function sendPatch(patch){
+  if(!syncConnected||!ws||ws.readyState!==WebSocket.OPEN)return false;
+  ws.send(JSON.stringify({type:"patch",patch,user:currentUser?.id||"unknown"}));
+  return true;
+}
+function applyPatch(p){
+  if(!p)return;
+  if(p.op==="upsertTrack"){
+    const i=state.tracks.findIndex(t=>t.id===p.track.id);
+    if(i<0)state.tracks.push(p.track); else state.tracks[i]={...state.tracks[i],...p.track};
+  }
+  if(p.op==="deleteTrack"){
+    state.tracks=state.tracks.filter(t=>t.id!==p.id);
+    delete state.reactions[p.id]; delete state.comments[p.id];
+  }
+  if(p.op==="reaction"){
+    state.reactions[p.id]??={};
+    if(p.value==null)delete state.reactions[p.id][p.user];
+    else state.reactions[p.id][p.user]=p.value;
+  }
+  if(p.op==="comment"){
+    state.comments[p.id]??=[];
+    state.comments[p.id].push(p.comment);
+  }
+  if(p.op==="activity"){
+    state.activity.unshift(p.activity); state.activity=state.activity.slice(0,100);
+  }
+  if(p.op==="profile"){
+    state.profiles[p.id]=p.profile;
+  }
+}
+
+/* ---------- UI ---------- */
+
+function login(){
+  const id=$("loginId").value.trim(), pw=$("loginPw").value;
+  if(!USERS[id]){$("loginError").textContent="❌ Identifiant incorrect.";return}
+  if(USERS[id].password!==pw){$("loginError").textContent="❌ Mot de passe incorrect.";return}
+  currentUser={id,...USERS[id]};
+  sessionStorage.setItem(KEY+"_user",JSON.stringify(currentUser));
+  showApp();
+}
+function showApp(){
+  $("loginPage").classList.add("hidden");$("app").classList.remove("hidden");
+  $("who").textContent=currentUser.display;$("welcome").textContent="Bonjour "+currentUser.display+".";
+  if(currentUser.creator){$("creator").classList.remove("hidden");$("studioBtn").classList.remove("hidden")}
+  $("serverUrl").value=localStorage.getItem(KEY+"_server")||"";
+  render();updateStats();renderActivity();
+}
+function canSee(t){return currentUser.creator||t.target==="ALL"||t.target===currentUser.id}
+async function render(){
+  for(const u of coverURLs)URL.revokeObjectURL(u);coverURLs.clear();
+  const q=$("search").value.trim().toLowerCase();
+  const list=state.tracks.filter(canSee).filter(t=>!q||t.title.toLowerCase().includes(q)||t.artist.toLowerCase().includes(q));
+  $("count").textContent=list.length+" "+(list.length>1?"musiques":"musique");
+  const grid=$("grid");grid.innerHTML="";
+  if(!list.length){grid.innerHTML='<div class="empty">🎵<br><br>Aucune musique disponible.</div>';return}
+  for(const t of list){
+    let cover="";
+    if(t.coverId){const b=await readBlob(t.coverId);if(b){cover=URL.createObjectURL(b);coverURLs.add(cover)}}
+    const r=state.reactions[t.id]?.[currentUser.id];
+    const card=document.createElement("article");card.className="card";
+    card.innerHTML=`<div class="cover">${cover?`<img src="${cover}" alt="">`:'<div class="sym">♫</div>'}<button class="play" data-play="${esc(t.id)}">▶</button></div>
+    <div class="title">${esc(t.title)}</div><div class="artist">${esc(t.artist)}</div><span class="badge">👤 ${esc(dest(t.target))}</span>
+    <div class="actions"><button class="act" data-play="${esc(t.id)}">▶</button><button class="act" data-like="${esc(t.id)}">${r==="like"?"💚":"👍"}</button><button class="act" data-dislike="${esc(t.id)}">${r==="dislike"?"❤️":"👎"}</button><button class="act" data-comment="${esc(t.id)}">💬</button></div>
+    <button class="act download" data-download="${esc(t.id)}">⬇️ Télécharger</button>
+    ${currentUser.creator?`<button class="act" data-edit="${esc(t.id)}">✏️ Modifier</button><button class="act delete" data-delete="${esc(t.id)}">🗑️ Supprimer</button>`:""}`;
+    grid.appendChild(card);
+  }
+  grid.querySelectorAll("[data-play]").forEach(b=>b.onclick=()=>playTrack(b.dataset.play));
+  grid.querySelectorAll("[data-like]").forEach(b=>b.onclick=()=>react(b.dataset.like,"like"));
+  grid.querySelectorAll("[data-dislike]").forEach(b=>b.onclick=()=>react(b.dataset.dislike,"dislike"));
+  grid.querySelectorAll("[data-comment]").forEach(b=>b.onclick=()=>openComments(b.dataset.comment));
+  grid.querySelectorAll("[data-download]").forEach(b=>b.onclick=()=>downloadTrack(b.dataset.download));
+  grid.querySelectorAll("[data-delete]").forEach(b=>b.onclick=()=>deleteTrack(b.dataset.delete));
+  grid.querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>openEdit(b.dataset.edit));
+}
+async function playTrack(id){
+  const t=state.tracks.find(x=>x.id===id); if(!t){toast("❌ Musique introuvable.");return}
+  const blob=await readBlob(t.audioId);
+  if(!blob){toast("❌ Audio absent sur cet appareil. Le serveur V9 doit fournir le fichier.");return}
+  const player=$("mainPlayer");
+  if(currentURL)URL.revokeObjectURL(currentURL);
+  currentURL=URL.createObjectURL(blob);
+  $("playerTitle").textContent=t.title;$("playerArtist").textContent=t.artist;
+  player.src=currentURL;player.load();
+  try{await player.play();$("playerStatus").className="status ok";$("playerStatus").textContent="▶️ Lecture en cours."}
+  catch(e){$("playerStatus").textContent="✅ Audio chargé. Appuie sur ▶️."}
+}
+function selectAudio(file){
+  if(!file)return;
+  const ok=file.type.startsWith("audio/")||/\.(mp3|wav|ogg|m4a|aac|flac|webm)$/i.test(file.name);
+  if(!ok){toast("❌ Fichier audio non reconnu.");return}
+  selectedAudio=file;$("fileName").textContent="🎵 "+file.name;
+  $("audioStatus").className="status ok";$("audioStatus").textContent="✅ "+file.name;
+  $("previewAudio").src=URL.createObjectURL(file);$("preview").style.display="block";
+}
+
+/*
+  Binary transfer:
+  The server stores audio/cover files. The browser sends them as base64
+  messages, so no external storage provider is required.
+*/
+function fileToDataURL(file){
+  return new Promise((resolve,reject)=>{
+    const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(file);
+  });
+}
+async function uploadBinary(id,file,kind){
+  if(!syncConnected){await storeBlob(id,file);return}
+  const data=await fileToDataURL(file);
+  ws.send(JSON.stringify({type:"upload",id,kind,name:file.name,mime:file.type||"application/octet-stream",data,user:currentUser.id}));
+  await storeBlob(id,file);
+}
+async function downloadBinaryFromServer(id){
+  if(!syncConnected)return null;
+  return new Promise(resolve=>{
+    const timeout=setTimeout(()=>resolve(null),10000);
+    const handler=e=>{
+      try{
+        const m=JSON.parse(e.data);
+        if(m.type==="file"&&m.id===id){
+          clearTimeout(timeout);ws.removeEventListener("message",handler);
+          fetch(m.data).then(r=>r.blob()).then(b=>{memoryBlobs.set(id,b);resolve(b)}).catch(()=>resolve(null));
+        }
+      }catch(_){}
+    };
+    ws.addEventListener("message",handler);
+    ws.send(JSON.stringify({type:"download",id}));
+  });
+}
+async function ensureBlob(id){
+  let b=await readBlob(id);
+  if(!b)b=await downloadBinaryFromServer(id);
+  return b;
+}
+
+async function publishMusic(){
+  if(!currentUser?.creator)return;
+  const title=$("musicTitle").value.trim(),artist=$("musicArtist").value.trim()||"Routier 87",target=$("musicTarget").value,cover=$("coverFile").files[0];
+  if(!title){toast("❌ Écris le titre.");return}
+  if(!selectedAudio){toast("❌ Sélectionne une musique.");return}
+  if(cover&&!cover.type.startsWith("image/")){toast("❌ La pochette doit être une image.");return}
+  const btn=$("publishBtn");btn.disabled=true;btn.textContent="⏳ PUBLICATION…";
+  try{
+    const id="track_"+Date.now()+"_"+Math.random().toString(36).slice(2);
+    const audioId=id+"_audio",coverId=cover?id+"_cover":null;
+    await uploadBinary(audioId,selectedAudio,"audio");
+    if(cover)await uploadBinary(coverId,cover,"cover");
+    const track={id,title,artist,target,audioId,coverId,filename:selectedAudio.name,mimeType:selectedAudio.type||"audio/mpeg",downloads:0,createdAt:Date.now()};
+    state.tracks.push(track);saveLocal();
+    addActivity("Routier 87","🎵 a publié",title+" → "+dest(target));
+    sendPatch({op:"upsertTrack",track});
+    selectedAudio=null;$("audioFile").value="";$("coverFile").value="";$("musicTitle").value="";$("fileName").textContent="";
+    $("audioStatus").textContent="Aucun fichier audio sélectionné."; $("preview").style.display="none";
+    await render();updateStats();toast("✅ « "+title+" » publié.");
+  }catch(e){console.error(e);toast("❌ Publication : "+e.message)}
+  finally{btn.disabled=false;btn.textContent="🚀 PUBLIER LA MUSIQUE"}
+}
+
+function react(id,type){
+  state.reactions[id]??={};
+  const old=state.reactions[id][currentUser.id];
+  const value=old===type?null:type;
+  if(value==null)delete state.reactions[id][currentUser.id];else state.reactions[id][currentUser.id]=value;
+  saveLocal();sendPatch({op:"reaction",id,user:currentUser.id,value});
+  const t=state.tracks.find(x=>x.id===id);if(t)addActivity(currentUser.display,type==="like"?"👍 a aimé":"👎 n'a pas aimé",t.title);
+  render();updateStats();
+}
+function openComments(id){currentTrackId=id;$("modalTitle").textContent="💬 "+state.tracks.find(t=>t.id===id).title;renderComments();$("modalBack").style.display="grid"}
+function renderComments(){
+  const a=state.comments[currentTrackId]||[];
+  $("commentList").innerHTML=a.length?a.map(c=>`<div class="comment"><b>${esc(c.user)}</b><div>${esc(c.text)}</div></div>`).join(""):"<p>Aucun commentaire.</p>";
+}
+function sendComment(){
+  const text=$("commentText").value.trim();if(!text)return;
+  const c={user:currentUser.display,userId:currentUser.id,text,date:new Date().toISOString()};
+  state.comments[currentTrackId]??=[];state.comments[currentTrackId].push(c);saveLocal();
+  sendPatch({op:"comment",id:currentTrackId,comment:c});
+  const t=state.tracks.find(x=>x.id===currentTrackId);if(t)addActivity(currentUser.display,"💬 a commenté",t.title+" : "+text);
+  $("commentText").value="";renderComments();updateStats();
+}
+async function downloadTrack(id){
+  const t=state.tracks.find(x=>x.id===id);if(!t)return;
+  let blob=await ensureBlob(t.audioId);if(!blob){toast("❌ Audio indisponible.");return}
+  t.downloads=(t.downloads||0)+1;saveLocal();sendPatch({op:"upsertTrack",track:t});
+  const u=URL.createObjectURL(blob),a=document.createElement("a");a.href=u;a.download=t.filename||t.title;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),2000);
+  addActivity(currentUser.display,"⬇️ a téléchargé",t.title);updateStats();
+}
+function openEdit(id){
+  const t=state.tracks.find(x=>x.id===id);if(!t)return;
+  $("editId").value=id;$("editTitle").value=t.title;$("editArtist").value=t.artist;$("editCover").value="";$("editAudio").value="";
+  $("editStatus").className="status";$("editStatus").textContent="Aucune modification enregistrée.";$("editBack").style.display="grid";
+}
+async function saveEdit(){
+  const id=$("editId").value,t=state.tracks.find(x=>x.id===id);if(!t)return;
+  const title=$("editTitle").value.trim(),artist=$("editArtist").value.trim()||"Routier 87",newCover=$("editCover").files[0],newAudio=$("editAudio").files[0];
+  if(!title){$("editStatus").className="status bad";$("editStatus").textContent="❌ Titre obligatoire.";return}
+  const oldTitle=t.title;
+  try{
+    t.title=title;t.artist=artist;
+    if(newCover){
+      const nid=t.id+"_cover_"+Date.now();await uploadBinary(nid,newCover,"cover");await removeBlob(t.coverId);t.coverId=nid;
+    }
+    if(newAudio){
+      const nid=t.id+"_audio_"+Date.now();await uploadBinary(nid,newAudio,"audio");await removeBlob(t.audioId);t.audioId=nid;t.filename=newAudio.name;t.mimeType=newAudio.type||"audio/mpeg";
+    }
+    saveLocal();sendPatch({op:"upsertTrack",track:t});addActivity("Routier 87","✏️ a modifié",oldTitle+" → "+title);
+    $("editStatus").className="status ok";$("editStatus").textContent="✅ Modifications synchronisées.";await render();updateStats();
+    setTimeout(()=>$("editBack").style.display="none",500);
+  }catch(e){$("editStatus").className="status bad";$("editStatus").textContent="❌ "+e.message}
+}
+async function deleteTrack(id){
+  const t=state.tracks.find(x=>x.id===id);if(!t)return;
+  if(!confirm("Supprimer définitivement « "+t.title+" » ?"))return;
+  await removeBlob(t.audioId);if(t.coverId)await removeBlob(t.coverId);
+  state.tracks=state.tracks.filter(x=>x.id!==id);delete state.reactions[id];delete state.comments[id];saveLocal();
+  sendPatch({op:"deleteTrack",id});addActivity("Routier 87","🗑️ a supprimé",t.title);await render();updateStats();toast("🗑️ Musique supprimée.");
+}
+function addActivity(user,action,text){
+  const a={user,action,text,date:new Date().toISOString()};
+  state.activity.unshift(a);state.activity=state.activity.slice(0,100);saveLocal();sendPatch({op:"activity",activity:a});renderActivity();
+}
+function renderActivity(){
+  $("activity").innerHTML=state.activity.length?state.activity.slice(0,50).map(a=>`<div class="event"><b>${esc(a.user)}</b><div>${esc(a.action)} : ${esc(a.text)}</div><small>${esc(new Date(a.date).toLocaleString("fr-FR"))}</small></div>`).join(""):"<p>Aucune activité.</p>";
+}
+function updateStats(){
+  if(!currentUser?.creator)return;
+  let likes=0,dislikes=0,commentsN=0,downloads=0;
+  Object.values(state.reactions).forEach(r=>Object.values(r).forEach(v=>v==="like"?likes++:v==="dislike"?dislikes++:0));
+  Object.values(state.comments).forEach(a=>commentsN+=a.length);
+  state.tracks.forEach(t=>downloads+=Number(t.downloads||0));
+  $("sTracks").textContent=state.tracks.length;$("sProfiles").textContent=Object.keys(state.profiles||USERS).length;
+  $("sLikes").textContent=likes;$("sDislikes").textContent=dislikes;$("sComments").textContent=commentsN;$("sDownloads").textContent=downloads;
+}
+
+/* ---------- Export / import ---------- */
+function exportData(){
+  const blob=new Blob([JSON.stringify({version:"9.0",exportedAt:new Date().toISOString(),state},null,2)],{type:"application/json"});
+  const u=URL.createObjectURL(blob),a=document.createElement("a");a.href=u;a.download="routier87-v9-backup.json";a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);
+}
+function importData(file){
+  const r=new FileReader();
+  r.onload=async()=>{
+    try{
+      const x=JSON.parse(r.result);if(!x.state)throw new Error("Sauvegarde invalide");
+      state={...state,...x.state};saveLocal();await render();updateStats();renderActivity();
+      if(syncConnected)ws.send(JSON.stringify({type:"replaceState",state,user:currentUser.id}));
+      toast("✅ Sauvegarde restaurée.");
+    }catch(e){toast("❌ "+e.message)}
+  };r.readAsText(file);
+}
+
+/* ---------- Events ---------- */
+$("loginBtn").onclick=login;
+$("loginPw").onkeydown=e=>{if(e.key==="Enter")login()};
+$("logout").onclick=()=>{sessionStorage.removeItem(KEY+"_user");location.reload()};
+$("studioBtn").onclick=()=>$("creator").scrollIntoView({behavior:"smooth"});
+$("search").oninput=render;$("publishBtn").onclick=publishMusic;
+$("closeModal").onclick=()=>$("modalBack").style.display="none";
+$("closeEdit").onclick=()=>$("editBack").style.display="none";
+$("saveEdit").onclick=saveEdit;$("sendComment").onclick=sendComment;
+$("commentText").onkeydown=e=>{if(e.key==="Enter")sendComment()};
+$("syncBtn").onclick=()=>$("syncBack").style.display="grid";
+$("closeSync").onclick=()=>$("syncBack").style.display="none";
+$("connectSync").onclick=connectSync;$("disconnectSync").onclick=disconnectSync;
+$("exportData").onclick=exportData;
+$("importData").onclick=()=>$("importFile").click();
+$("importFile").onchange=e=>e.target.files[0]&&importData(e.target.files[0]);
+
+const drop=$("drop"),audioFile=$("audioFile");
+drop.onclick=()=>audioFile.click();audioFile.onchange=e=>selectAudio(e.target.files[0]);
+drop.addEventListener("dragover",e=>{e.preventDefault();drop.style.background="#7c5cff22"});
+drop.addEventListener("dragleave",()=>drop.style.background="");
+drop.addEventListener("drop",e=>{e.preventDefault();drop.style.background="";selectAudio(e.dataTransfer.files[0])});
+$("modalBack").onclick=e=>{if(e.target.id==="modalBack")$("modalBack").style.display="none"};
+$("editBack").onclick=e=>{if(e.target.id==="editBack")$("editBack").style.display="none"};
+$("syncBack").onclick=e=>{if(e.target.id==="syncBack")$("syncBack").style.display="none"};
+
+(async function init(){
+  loadLocal();
+  try{await openDB()}catch(e){console.warn("IndexedDB indisponible",e)}
+  const saved=sessionStorage.getItem(KEY+"_user");
+  if(saved){try{currentUser=JSON.parse(saved);showApp()}catch(e){}}
+})();
+</script>
+</body>
+</html>
